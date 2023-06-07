@@ -8,16 +8,31 @@
 	export let ndk: NDK;
 
 	let relays: NDKRelay[] = [];
+	let notices: Map<NDKRelay, string[]> = new Map();
 
 	onMount(() => {
 		update();
 		ndk.pool.on('connect', () => { update() })
 		ndk.pool.on('relay:connect', () => { update() })
 		ndk.pool.on('disconnect', () => { update() })
+		ndk.pool.on('notice', relayNotice)
 	})
 
+	function relayNotice(relay: NDKRelay, notice: string) {
+		if (!notices.has(relay)) {
+			notices.set(relay, []);
+		}
+
+		notices.get(relay)?.push(notice);
+		notices = notices;
+
+		setTimeout(() => {
+			notices.get(relay)?.shift();
+			notices = notices;
+		}, 60000);
+	}
+
 	function update() {
-		// get the values from the map in ndk.pool
 		relays = Array.from(ndk.pool.relays.values())
 	}
 
@@ -32,40 +47,47 @@
 <ul>
 	{#each relays as relay}
 		<li>
-			{#if relay.status === NDKRelayStatus.CONNECTING}
-				<span class="relay-status relay-status--connecting"></span>
-			{:else if relay.status === NDKRelayStatus.DISCONNECTED}
-				<span class="relay-status relay-status--disconnected"></span>
-			{:else if relay.status === NDKRelayStatus.CONNECTED}
-				<span class="relay-status relay-status--connected"></span>
-			{:else if relay.status === NDKRelayStatus.FLAPPING}
-				<span class="relay-status relay-status--flapping"></span>
-			{/if}
-			<span class="relay-name"><RelayName {relay} /></span>
-			{#if relay.activeSubscriptions.size > 0}
-				<button
-					class="relay-subscriptions"
-					on:click={() => { toggleSubList(relay) }}
-				>
-					{relay.activeSubscriptions.size} subscriptions
-				</button>
-
-				{#if expandSubscriptionList[relay.url]}
-					<ul>
-						{#each Array.from(relay.activeSubscriptions) as subscription}
-							<li>
-								<div class="relay-subscription-filter">{JSON.stringify(subscription.filter)}</div>
-								<span class="relay-subscription--event-count">
-									{subscription.eventsPerRelay.get(relay)?.size ?? 0} events
-								</span>
-
-								{#if subscription.eosesSeen.has(relay)}
-									<span class="small-note">EOSE received</span>
-								{/if}
-							</li>
-						{/each}
-					</ul>
+			<button class="relay-button" on:click={() => { toggleSubList(relay) }}>
+				{#if relay.status === NDKRelayStatus.CONNECTING}
+					<span class="relay-status relay-status--connecting"></span>
+				{:else if relay.status === NDKRelayStatus.DISCONNECTED}
+					<span class="relay-status relay-status--disconnected"></span>
+				{:else if relay.status === NDKRelayStatus.CONNECTED}
+					<span class="relay-status relay-status--connected"></span>
+				{:else if relay.status === NDKRelayStatus.FLAPPING}
+					<span class="relay-status relay-status--flapping"></span>
 				{/if}
+				<span class="relay-name"><RelayName {relay} /></span>
+				{#if relay.activeSubscriptions.size > 0}
+					<div class="relay-subscriptions">
+						{relay.activeSubscriptions.size} subscriptions
+					</div>
+				{/if}
+			</button>
+
+			{#if notices.has(relay)}
+				<ul>
+					{#each notices.get(relay) as notice}
+						<li class="relay-notice">{notice}</li>
+					{/each}
+				</ul>
+			{/if}
+
+			{#if expandSubscriptionList[relay.url]}
+				<ul>
+					{#each Array.from(relay.activeSubscriptions) as subscription}
+						<li>
+							<div class="relay-subscription-filter">{JSON.stringify(subscription.filter)}</div>
+							<span class="relay-subscription--event-count">
+								{subscription.eventsPerRelay.get(relay)?.size ?? 0} events
+							</span>
+
+							{#if subscription.eosesSeen.has(relay)}
+								<span class="small-note">EOSE received</span>
+							{/if}
+						</li>
+					{/each}
+				</ul>
 			{/if}
 		</li>
 	{/each}
@@ -74,6 +96,27 @@
 <style>
 	.relay-name {
 		font-weight: 400;
+	}
+
+	.relay-button {
+		background: none;
+		border: none;
+		padding: 0;
+		font: inherit;
+		cursor: pointer;
+		text-align: left;
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		width: 100%;
+	}
+
+	.relay-notice {
+		font-size: 0.8em;
+		font-weight: 300;
+		background-color: #e74c3c88;
+		padding: 5px;
+		border-radius: 5px;
 	}
 
 	.relay-status {
@@ -121,6 +164,7 @@
 		font-family: monospace;
 		padding: 5px;
 		background-color: white;
+		color: #111111;
 		border-radius: 5px;
 		border: 1px solid #e1e1e1;
 		box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
