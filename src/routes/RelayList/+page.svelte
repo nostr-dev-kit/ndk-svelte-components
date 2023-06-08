@@ -1,6 +1,6 @@
 <script>
 	import ndk from "$lib/stores/ndk";
-	import RelayList from "$lib/svelte/RelayList.svelte";
+	import RelayList from "$lib/relay/RelayList.svelte";
 
 	let filter = "";
 
