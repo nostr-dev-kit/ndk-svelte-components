@@ -3,7 +3,7 @@
 	import type NDK from '@nostr-dev-kit/ndk';
 	import { NDKRelayStatus } from '@nostr-dev-kit/ndk';
 	import { onMount } from 'svelte';
-	import RelayName from './relays/RelayName.svelte';
+	import RelayName from './RelayName.svelte';
 
 	export let ndk: NDK;
 

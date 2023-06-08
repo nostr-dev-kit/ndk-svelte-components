@@ -1,5 +1,12 @@
 export * from "./utils";
 
-import RelayList from "./svelte/RelayList.svelte";
+import RelayList from "./relay/RelayList.svelte";
+import Avatar from "./user/Avatar.svelte";
 
-export { RelayList };
+export {
+    // User
+    Avatar,
+
+    // Relay
+    RelayList
+};
