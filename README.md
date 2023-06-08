@@ -8,7 +8,24 @@ Reusable Svelte components.
 npm add @nostr-dev-kit/ndk-svelte-components
 ```
 
-## Components
+## Storybook
+
+```
+git clone https://github.com/nostr-dev-kit/ndk-svelte-components
+cd ndk-svelte-components
+npm i
+npm run storybook
+```
+
+# Components
+
+## User
+
+### `<Avatar>`
+
+Displays a user's avatar
+
+## Relay
 
 ### `<RelayList ndk />`
 
