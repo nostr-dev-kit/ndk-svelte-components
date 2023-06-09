@@ -1,6 +1,8 @@
 <script lang="ts">
     import type { NDKUser } from '@nostr-dev-kit/ndk';
     import type NDK from '@nostr-dev-kit/ndk';
+    import { truncatedNip05 } from '$lib/utils/user';
+    import { truncatedBech32 } from '$lib/utils';
 
     /**
      * The NDK instance you want to use
@@ -26,15 +28,15 @@
         let opts = npub ? { npub } : { hexpubkey: pubkey };
         user = ndk.getUser(opts);
     }
-
-    let defaultStyle = 'width:64px; height: 64px;';
 </script>
 
-{#await user?.fetchProfile() then eventSet}
-    <img
-        src={user?.profile?.image}
-        alt={`Avatar for ${npub}`}
-        class={$$props.class}
-        style={!$$props.class && !$$props.style ? defaultStyle : $$props.style}
-    />
-{/await}
+{#if user}
+    {#await user.fetchProfile() then eventSet}
+        <span class={$$props.class} style={$$props.style}>
+            {user.profile?.displayName ||
+                user.profile?.name ||
+                truncatedNip05(user.profile) ||
+                truncatedBech32(user.npub)}
+        </span>
+    {/await}
+{/if}
