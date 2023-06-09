@@ -25,6 +25,10 @@ npm run storybook
 
 Displays a user's avatar
 
+### `<Name>`
+
+Displays a user's name
+
 ## Relay
 
 ### `<RelayList ndk />`
@@ -39,4 +43,5 @@ MIT
 
 # Author
 
-* pablof7z ([npub1l2vyh47mk2p0qlsku7hg0vn29faehy9hy34ygaclpn66ukqp3afqutajft](https://primal.net/pablof7z))
+-   pablof7z ([npub1l2vyh47mk2p0qlsku7hg0vn29faehy9hy34ygaclpn66ukqp3afqutajft](https://primal.net/pablof7z))
+-   jeffg ([npub1zuuajd7u3sx8xu92yav9jwxpr839cs0kc3q6t56vd5u9q033xmhsk6c2uc](https://primal.net/jeffg))

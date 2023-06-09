@@ -6,7 +6,7 @@ const _ndk = new NDK({
         'wss://relay.f7z.io',
         'wss://nos.lol',
         'wss://relay.damus.io',
-        'wss://relay.snort.social',
+        'wss://relay.snort.social'
     ]
 });
 
