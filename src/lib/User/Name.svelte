@@ -31,12 +31,16 @@
 </script>
 
 {#if user}
-    {#await user.fetchProfile() then eventSet}
+    {#await user.fetchProfile()}
+        <span class={$$props.class} style={$$props.style}>Loading...</span>
+    {:then value}
         <span class={$$props.class} style={$$props.style}>
             {user.profile?.displayName ||
                 user.profile?.name ||
                 truncatedNip05(user.profile) ||
                 truncatedBech32(user.npub)}
         </span>
+    {:catch error}
+        <span class={$$props.class} style={$$props.style}>Error loading name</span>
     {/await}
 {/if}
