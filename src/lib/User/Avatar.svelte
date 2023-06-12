@@ -35,7 +35,7 @@
         src="https://placehold.co/400/ccc/ccc/webp"
         alt={`Loading avatar for ${npub}`}
         title={`Loading avatar for ${npub}`}
-        class={$$props.class}
+        class={`animate-pulse ${$$props.class}`}
         style={!$$props.class && !$$props.style ? defaultStyle : $$props.style}
     />
 {:then value}
@@ -55,3 +55,19 @@
         style={!$$props.class && !$$props.style ? defaultStyle : $$props.style}
     />
 {/await}
+
+<style>
+    .animate-pulse {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse {
+        0%,
+        100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.5;
+        }
+    }
+</style>
