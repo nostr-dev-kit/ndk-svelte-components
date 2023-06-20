@@ -36,7 +36,7 @@
 
 {#if user}
     {#await user.fetchProfile()}
-        <span class={$$props.class} style={$$props.style}>«{truncatedBech32(_npub)}»</span>
+        <span class={$$props.class} style={$$props.style}>[{truncatedBech32(_npub)}]</span>
     {:then value}
         <span class={$$props.class} style={$$props.style}>
             {user.profile?.displayName ||
@@ -45,6 +45,6 @@
                 truncatedBech32(user.npub)}
         </span>
     {:catch error}
-        <span class={$$props.class} style={$$props.style}>Error loading name</span>
+        <span class={$$props.class} style={$$props.style}>[{truncatedBech32(_npub)}]</span>
     {/await}
 {/if}
