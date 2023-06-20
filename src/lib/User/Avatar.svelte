@@ -25,6 +25,7 @@
     if (!user) {
         let opts = npub ? { npub } : { hexpubkey: pubkey };
         user = ndk.getUser(opts);
+        npub = user.npub;
     }
 
     let defaultStyle = 'width:64px; height: 64px; background-color: #ccc;';
@@ -40,8 +41,8 @@
     />
 {:then value}
     <img
-        src={user?.profile?.image}
-        alt={`Avatar for ${npub}`}
+        src={user?.profile?.image??"https://placehold.co/400/ccc/ccc/webp"}
+        alt=""
         title={`Avatar for ${npub}`}
         class={$$props.class}
         style={!$$props.class && !$$props.style ? defaultStyle : $$props.style}

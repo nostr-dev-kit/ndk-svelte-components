@@ -1,6 +1,6 @@
 {
     "name": "@nostr-dev-kit/ndk-svelte-components",
-    "version": "0.2.8",
+    "version": "0.2.9",
     "scripts": {
         "dev": "vite dev",
         "build": "vite build && npm run package",
@@ -68,7 +68,7 @@
     "types": "./dist/index.d.ts",
     "type": "module",
     "dependencies": {
-        "@nostr-dev-kit/ndk": "^0.5.5",
+        "@nostr-dev-kit/ndk": "^0.5.13",
         "rehype-autolink-headings": "^6.1.1",
         "rehype-slug": "^5.1.0",
         "svelte-preprocess": "^5.0.4"

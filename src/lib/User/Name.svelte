@@ -27,12 +27,16 @@
     if (!user) {
         let opts = npub ? { npub } : { hexpubkey: pubkey };
         user = ndk.getUser(opts);
+        npub = user.npub;
+
     }
+
+    const _npub = npub || user?.npub;
 </script>
 
 {#if user}
     {#await user.fetchProfile()}
-        <span class={$$props.class} style={$$props.style}>Loading...</span>
+        <span class={$$props.class} style={$$props.style}>«{truncatedBech32(_npub)}»</span>
     {:then value}
         <span class={$$props.class} style={$$props.style}>
             {user.profile?.displayName ||
