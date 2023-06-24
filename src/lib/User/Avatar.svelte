@@ -34,8 +34,8 @@
 {#await user?.fetchProfile()}
     <img
         src="https://placehold.co/400/ccc/ccc/webp"
-        alt={`Loading avatar for ${npub}`}
-        title={`Loading avatar for ${npub}`}
+        alt=""
+        title=""
         class={`animate-pulse ${$$props.class}`}
         style={!$$props.class && !$$props.style ? defaultStyle : $$props.style}
     />
@@ -43,13 +43,13 @@
     <img
         src={user?.profile?.image??"https://placehold.co/400/ccc/ccc/webp"}
         alt=""
-        title={`Avatar for ${npub}`}
+        title=""
         class={$$props.class}
         style={!$$props.class && !$$props.style ? defaultStyle : $$props.style}
     />
 {:catch error}
     <img
-        src="https://placehold.co/400/faa/faa/webp"
+        src="https://placehold.co/400/ccc/ccc/webp"
         alt={`Error loading avatar for ${npub}`}
         title={`Error loading avatar for ${npub}`}
         class={$$props.class}

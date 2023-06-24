@@ -55,3 +55,10 @@ export const Default: Story = {
         npub: 'npub1zuuajd7u3sx8xu92yav9jwxpr839cs0kc3q6t56vd5u9q033xmhsk6c2uc'
     }
 };
+
+export const Nonexistent: Story = {
+    args: {
+        ndk: ndk,
+        npub: 'npub1vqtlp64gdfdqr64xq9g7t8qc9kyyns7nd23nnsf3mv94aqht8ensn29e34'
+    }
+};
