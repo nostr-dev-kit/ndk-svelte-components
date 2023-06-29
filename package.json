@@ -68,7 +68,10 @@
     "types": "./dist/index.d.ts",
     "type": "module",
     "dependencies": {
-        "@nostr-dev-kit/ndk": "^0.6.0",
+        "@nostr-dev-kit/ndk": "^0.6.4",
+        "classnames": "^2.3.2",
+        "hurdak": "github:ConsignCloud/hurdak",
+        "ramda": "^0.29.0",
         "rehype-autolink-headings": "^6.1.1",
         "rehype-slug": "^5.1.0",
         "svelte-preprocess": "^5.0.4"
