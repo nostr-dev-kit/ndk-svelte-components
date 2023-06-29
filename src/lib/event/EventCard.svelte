@@ -23,8 +23,8 @@
 
 {#await eventPromise}
 {:then}
-    <div class="event-card">
-        <div class="flex flex-row items-start justify-left">
+    <div class="event-card opacity-50 font-black">
+        <div class="event-card--header">
             <Avatar {ndk} user={event.author} class="event-card--avatar"/>
             <Name {ndk} user={event.author} class="event-card--name" />
         </div>
@@ -37,6 +37,10 @@
 {/await}
 
 <style lang="postcss">
+    @import 'tailwindcss/base';
+    @import 'tailwindcss/components';
+    @import 'tailwindcss/utilities';
+
     .event-card {
         display: flex;
         flex-direction: column;
@@ -50,15 +54,21 @@
         box-shadow: 0 0 0.5rem var(--color-shadow);
     }
 
+    .event-card--header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: start;
+        gap: 0.25rem;
+        width: 100%;
+        padding: 0.5rem;
+    }
+
     * > :global(.event-card--avatar) {
-        width: 20px;
-        height: 20px;
+        width: 40px;
+        height: 40px;
         padding: 0px;
         margin: 0px;
         border-radius: 100%;
-    }
-
-    .event-card .error {
-        color: var(--color-error);
     }
 </style>

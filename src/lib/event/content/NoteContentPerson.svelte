@@ -6,4 +6,10 @@
     export let value: { pubkey: string };
 </script>
 
-<Name {ndk} pubkey={value.pubkey} />
+<span>
+    <Name
+        {ndk}
+        pubkey={value.pubkey}
+        on:click
+    />
+</span>

@@ -13,7 +13,7 @@
     // import QRCode from "src/partials/QRCode.svelte"
     import NoteContentNewline from "./NoteContentNewline.svelte";
     import NoteContentTopic from "./NoteContentTopic.svelte";
-    // import NoteContentLink from "./NoteContentLink.svelte"
+    import NoteContentLink from "./NoteContentLink.svelte"
     import NoteContentPerson from "./NoteContentPerson.svelte"
     import type NDK from "@nostr-dev-kit/ndk";
     import EventCard from "../EventCard.svelte";
@@ -45,15 +45,14 @@
         <!-- {:else if type === INVOICE}
           <div on:click|stopPropagation>
             <QRCode fullWidth onClick="copy" code={value} />
-          </div>
+          </div>-->
         {:else if type === LINK}
-          <NoteContentLink {value} showMedia={showMedia && isStartOrEnd(i)} />-->
+            <NoteContentLink {value} showMedia={showMedia && isStartOrEnd(i)} />
         {:else if type.match(/^nostr:np(rofile|ub)$/)}
-          <NoteContentPerson {ndk} {value} />
+            <NoteContentPerson {ndk} {value} on:click />
         {:else if type.startsWith("nostr:") && showMedia && isStartOrEnd(i) && value.id !== anchorId}
             <EventCard {ndk} id={value.id} relays={value.relays} />
         {:else if type.startsWith("nostr:")}
-        if type.startsWith("nostr:")
           <!-- <NoteContentEntity {value} /> -->
         {:else}
           {value}

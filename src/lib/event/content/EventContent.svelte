@@ -13,7 +13,7 @@
     export let event: NDKEvent;
     export let anchorId: string | null = null
     export let maxLength = 700
-    export let showEntire = false
+    export let showEntire = true
     export let showMedia = true;
 </script>
 
@@ -30,5 +30,5 @@
 {:else if event.kind === 30023}
 <Kind30023 {event} {showEntire} {showMedia} />-->
 {:else}
-    <Kind1 {ndk} {event} {anchorId} {maxLength} {showEntire} {showMedia} />
+    <Kind1 {ndk} {event} {anchorId} {maxLength} {showEntire} {showMedia} on:click />
 {/if}

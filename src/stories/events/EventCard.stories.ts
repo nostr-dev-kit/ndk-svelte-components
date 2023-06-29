@@ -34,7 +34,7 @@ type Story = StoryObj<typeof meta>;
 const ndk = new NDK({ explicitRelayUrls: ['wss://nos.lol'] });
 await ndk.connect();
 
-const id = 'note1zgft83adr408ngycf4hgqay3k3vyethfxc8a9wtq807waf3wwcdsys6wev';
+const id = 'note194n247lecqgcskk5rmmfgrapt4jx7ppq64xec0eca3s4ta3hwkrsex7pxa';
 
 export const Default: Story = {
     args: {
