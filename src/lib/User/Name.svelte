@@ -3,6 +3,7 @@
     import type NDK from '@nostr-dev-kit/ndk';
     import { truncatedNip05 } from '$lib/utils/user';
     import { truncatedBech32 } from '$lib/utils';
+    import { createEventDispatcher } from "svelte";
 
     /**
      * The NDK instance you want to use
@@ -32,19 +33,29 @@
     }
 
     const _npub = npub || user?.npub;
+
+    const dispatch = createEventDispatcher();
 </script>
 
-{#if user}
-    {#await user.fetchProfile()}
-        <span class={$$props.class} style={$$props.style}>[{truncatedBech32(_npub)}]</span>
-    {:then value}
-        <span class={$$props.class} style={$$props.style}>
-            {user.profile?.displayName ||
-                user.profile?.name ||
-                truncatedNip05(user.profile) ||
-                truncatedBech32(user.npub)}
-        </span>
-    {:catch error}
-        <span class={$$props.class} style={$$props.style}>[{truncatedBech32(_npub)}]</span>
-    {/await}
-{/if}
+<span class="name">
+    {#if user}
+        {#await user.fetchProfile()}
+            <span class={$$props.class} style={$$props.style}>[{truncatedBech32(_npub)}]</span>
+        {:then value}
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
+            <!-- svelte-ignore a11y-missing-attribute -->
+            <a
+                class={$$props.class}
+                style={$$props.style}
+                on:click|preventDefault|stopPropagation={() => { dispatch('click', user) }}
+            >
+                {user.profile?.displayName ||
+                    user.profile?.name ||
+                    truncatedNip05(user.profile) ||
+                    truncatedBech32(user.npub)}
+            </a>
+        {:catch error}
+            <span class={$$props.class} style={$$props.style}>[{truncatedBech32(_npub)}]</span>
+        {/await}
+    {/if}
+</span>
