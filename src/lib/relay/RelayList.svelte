@@ -71,7 +71,8 @@
                 <span class="relay-name"><RelayName {relay} /></span>
                 {#if relay.activeSubscriptions.size > 0}
                     <div class="relay-subscriptions">
-                        {relay.activeSubscriptions.size} subscriptions
+                        {relay.activeSubscriptions.size}
+                        {relay.activeSubscriptions.size === 1 ? 'subscription' : 'subscriptions'}
                     </div>
                 {/if}
             </button>
