@@ -7,7 +7,7 @@ Reusable Svelte components.
 ```
 npm add @nostr-dev-kit/ndk-svelte-components
 ```
-
+- Troubleshooting, if `npm` doesn't work use `pnpm` or `yarn` to install the package. e.g. `pnpm add @nostr-dev-kit/ndk-svelte-components`.
 ## Storybook
 
 ```
