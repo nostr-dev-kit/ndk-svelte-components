@@ -22,7 +22,7 @@
 </script>
 
 {#await eventPromise then}
-    <div class="event-card opacity-50 font-black">
+    <div class="event-card">
         <div class="event-card--header">
             <Avatar {ndk} user={event?.author} class="event-card--avatar" />
             <Name {ndk} user={event?.author} class="event-card--name" />
@@ -39,12 +39,11 @@
     .event-card {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
         justify-content: center;
         width: 100%;
         padding: 1rem;
         border: 1px solid var(--color-border);
-        border-radius: 1rem;
         background-color: var(--color-bg);
         box-shadow: 0 0 0.5rem var(--color-shadow);
     }
@@ -56,7 +55,7 @@
         justify-content: flex-start;
         gap: 0.25rem;
         width: 100%;
-        padding: 0.5rem;
+        padding: 0;
     }
 
     * > :global(.event-card--avatar) {

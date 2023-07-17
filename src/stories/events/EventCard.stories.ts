@@ -36,9 +36,18 @@ await ndk.connect();
 
 const id = 'note194n247lecqgcskk5rmmfgrapt4jx7ppq64xec0eca3s4ta3hwkrsex7pxa';
 
+const kind1063Id = 'nevent1qqs2vrx4ffqyq42yge95v3rfyr5gqr9z3pqpe7j7dymlk4lv3pwse6qfcjqkn';
+
 export const Default: Story = {
     args: {
         ndk,
         id
+    }
+};
+
+export const Kind1063: Story = {
+    args: {
+        ndk,
+        id: kind1063Id
     }
 };
