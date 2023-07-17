@@ -1,12 +1,13 @@
 <script lang="ts">
-    import Kind1 from "./Kind1.svelte"
-    import type { NDKEvent } from "@nostr-dev-kit/ndk";
-    import type NDK from "@nostr-dev-kit/ndk";
+    import Kind1 from './Kind1.svelte';
+    import type { NDKEvent } from '@nostr-dev-kit/ndk';
+    import type NDK from '@nostr-dev-kit/ndk';
     // import NoteContentLink from "src/app/shared/NoteContentLink.svelte"
 
     export let ndk: NDK;
     export let event: NDKEvent;
-    export let anchorId, maxLength, showEntire, showMedia
+    export let anchorId, maxLength, showEntire;
+    export const showMedia = undefined; // Unused so far
 
     // const ref = event?.tagValue("r");
 </script>

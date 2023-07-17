@@ -3,7 +3,7 @@
     import type NDK from '@nostr-dev-kit/ndk';
     import { truncatedNip05 } from '$lib/utils/user';
     import { truncatedBech32 } from '$lib/utils';
-    import { createEventDispatcher } from "svelte";
+    import { createEventDispatcher } from 'svelte';
 
     /**
      * The NDK instance you want to use
@@ -29,7 +29,6 @@
         let opts = npub ? { npub } : { hexpubkey: pubkey };
         user = ndk.getUser(opts);
         npub = user.npub;
-
     }
 
     const _npub = npub || user?.npub;
@@ -47,7 +46,9 @@
             <a
                 class={$$props.class}
                 style={$$props.style}
-                on:click|preventDefault|stopPropagation={() => { dispatch('click', user) }}
+                on:click|preventDefault|stopPropagation={() => {
+                    dispatch('click', user);
+                }}
             >
                 {user.profile?.displayName ||
                     user.profile?.name ||
