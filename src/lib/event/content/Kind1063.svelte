@@ -13,13 +13,21 @@
         'image/gif'
     ];
 
+    const SUPPORTED_VIDEO_TYPES = [
+        'video/mp4',
+        'video/ogg',
+        'video/quicktime',
+        'video/avi',
+        'video/mpeg'
+    ];
+
     const file: string = event.getMatchingTags('url')[0][1];
     const truncatedFile: string = file.substring(0, 32).concat('...');
     const mimeType: string = event.getMatchingTags('m')[0][1];
     const sizeTags: NDKTag[] = event.getMatchingTags('size');
     const size: string = sizeTags ? humanFileSize(parseInt(sizeTags[0][1])) : '';
     const dimTags: NDKTag[] = event.getMatchingTags('dim');
-    const dim: string = dimTags ? dimTags[0][1] : '';
+    const dim: string = dimTags.length > 0 ? dimTags[0][1] : '';
 </script>
 
 <div class="kind1063--content">
@@ -36,6 +44,16 @@
         <div><span class="kind1063-label">File preview:</span></div>
         <div class="kind1063--filePreview">
             <img src={file} alt={event.content} />
+        </div>
+    {/if}
+    {#if showMedia && SUPPORTED_VIDEO_TYPES.includes(mimeType)}
+        <div><span class="kind1063-label">File preview:</span></div>
+        <div class="kind1063--filePreview">
+            <!-- svelte-ignore a11y-media-has-caption -->
+            <video controls>
+                <source src={file} type={mimeType} />
+                <a href={file}>Download the video</a>
+            </video>
         </div>
     {/if}
 </div>
@@ -55,8 +73,9 @@
     .kind1063--filePreview {
         width: 100%;
     }
-    .kind1063--filePreview img {
-        max-width: 35%;
-        max-height: 35%;
+    .kind1063--filePreview img,
+    .kind1063--filePreview video {
+        max-width: 100%;
+        max-height: 100%;
     }
 </style>

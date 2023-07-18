@@ -36,7 +36,8 @@ await ndk.connect();
 
 const id = 'note194n247lecqgcskk5rmmfgrapt4jx7ppq64xec0eca3s4ta3hwkrsex7pxa';
 
-const kind1063Id = 'nevent1qqs2vrx4ffqyq42yge95v3rfyr5gqr9z3pqpe7j7dymlk4lv3pwse6qfcjqkn';
+const kind1063Image = 'nevent1qqs2vrx4ffqyq42yge95v3rfyr5gqr9z3pqpe7j7dymlk4lv3pwse6qfcjqkn';
+const kind1063Video = 'nevent1qqs0qklqj3uwdjr7cuj8qf266fyw6vwf52gd0vlrqqplxn8krvz2j6ghkkw5n';
 
 export const Default: Story = {
     args: {
@@ -45,9 +46,16 @@ export const Default: Story = {
     }
 };
 
-export const Kind1063: Story = {
+export const Kind1063WithImage: Story = {
     args: {
         ndk,
-        id: kind1063Id
+        id: kind1063Image
+    }
+};
+
+export const Kind1063WithVideo: Story = {
+    args: {
+        ndk,
+        id: kind1063Video
     }
 };
