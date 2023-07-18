@@ -5,19 +5,41 @@ Reusable Svelte components.
 ## Installation
 
 ```
+# With npm
 npm add @nostr-dev-kit/ndk-svelte-components
+
+# With pnpm
+pnpm add @nostr-dev-kit/ndk-svelte-components
+
+# With yarn
+yarn install @nostr-dev-kit/ndk-svelte-components
 ```
 
 ## Storybook
 
+This project uses `pnpm` to manage dependencies.
+
 ```
 git clone https://github.com/nostr-dev-kit/ndk-svelte-components
 cd ndk-svelte-components
-npm i
-npm run storybook
+pnpm i
+pnpm run storybook
 ```
 
 # Components
+
+## Event
+
+### `<EventCard>`
+
+Displays a card with formatted event content.
+
+### `<EventContent>`
+
+Formats the content of an event for an `EventCard`. Currently supports:
+
+-   kind 1 events
+-   Embedded kind 1 events in other kind 1 events
 
 ## User
 
