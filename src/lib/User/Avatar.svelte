@@ -24,8 +24,12 @@
 
     if (!user) {
         let opts = npub ? { npub } : { hexpubkey: pubkey };
-        user = ndk.getUser(opts);
-        npub = user.npub;
+        try {
+            user = ndk.getUser(opts);
+        } catch (e) {
+            console.error(`error trying to get user`, {opts}, e);
+        }
+        npub = user?.npub;
     }
 
     let defaultStyle = 'width:64px; height: 64px; background-color: #ccc;';
@@ -33,10 +37,9 @@
 
 {#await user?.fetchProfile()}
     <img
-        src="https://placehold.co/400/ccc/ccc/webp"
         alt=""
         title=""
-        class={`animate-pulse ${$$props.class}`}
+        class="animate-pulse {$$props.class}"
         style={!$$props.class && !$$props.style ? defaultStyle : $$props.style}
     />
 {:then value}
@@ -49,7 +52,6 @@
     />
 {:catch error}
     <img
-        src="https://placehold.co/400/ccc/ccc/webp"
         alt={`Error loading avatar for ${npub}`}
         title={`Error loading avatar for ${npub}`}
         class={$$props.class}
