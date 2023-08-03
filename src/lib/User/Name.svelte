@@ -33,9 +33,6 @@
 
     const _npub = npub || user?.npub;
 
-    // Resets button to look like normal text if no other class or styles are passed in
-    const defaultStyle = 'background: none; color: inherit; border: none; padding: 0; font: inherit; cursor: pointer; outline: inherit;';
-
     const dispatch = createEventDispatcher();
 </script>
 
@@ -43,15 +40,15 @@
     {#if user}
         {#await user.fetchProfile()}
             <span
-                class={$$props.class}
-                style={!$$props.class && !$$props.style ? defaultStyle : $$props.style}
+                class="name--loading {$$props.class}"
+                style={$$props.style}
             >
                 [{truncatedBech32(_npub)}]
             </span>
         {:then value}
             <button
-                class={$$props.class}
-                style={!$$props.class && !$$props.style ? defaultStyle : $$props.style}
+                class="name--button {$$props.class}"
+                style={$$props.style}
                 tabindex="0"
                 on:click|preventDefault|stopPropagation={() => {
                     dispatch('click', user);
@@ -64,11 +61,23 @@
             </button>
         {:catch error}
             <span
-                class={$$props.class}
-                style={!$$props.class && !$$props.style ? defaultStyle : $$props.style}
+                class="name--error {$$props.class}"
+                style={$$props.style}
             >
                 [{truncatedBech32(_npub)}]
             </span>
         {/await}
     {/if}
 </span>
+
+<style lang="postcss">
+    .name--button {
+        background: none;
+        color: inherit;
+        border:none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+    }
+</style>
