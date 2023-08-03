@@ -11,6 +11,7 @@ import Name from '../../lib/user/Name.svelte';
  * 4. `npub` truncated to the first 9 characters, ending in `...`
  *
  * As with all components, you can pass `class` or `style` props to the component.
+ * If no `class` or `style` prop is passed, default styles will render the name as normal text.
  */
 
 const meta = {
