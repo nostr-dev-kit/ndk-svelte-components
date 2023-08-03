@@ -2,12 +2,12 @@ import type { Meta, StoryObj } from '@storybook/svelte';
 import NDK from '@nostr-dev-kit/ndk';
 
 import EventContent from '../../lib/event/content/EventContent.svelte';
-
+import Kind1 from './kinds/1.stories';
 /**
  * Renders an event's content
  */
 
-const meta = {
+const meta: Meta<typeof EventContent> = {
     title: 'Event/EventContent',
     component: EventContent,
     tags: ['autodocs'],
@@ -35,12 +35,12 @@ const ndk = new NDK({ explicitRelayUrls: ['wss://nos.lol'] });
 await ndk.connect();
 
 const event = await ndk.fetchEvent(
-    'nevent1qqsz62c5ll2fh4fmakmgcnhr0amv9da9z3r2yyez3xv5ua2ut9n35hspz9mhxue69uhkummnw3ezuamfdejj7qgwwaehxw309ahx7uewd3hkctcpzamhxue69uhhyetvv9ujumn0wd68ytnzv9hxgtcpz4mhxue69uhhyetvv9ujuerpd46hxtnfduhszymhwden5te0wfjkccte9enrw73wd9hj7dsra6u'
+    'note194n247lecqgcskk5rmmfgrapt4jx7ppq64xec0eca3s4ta3hwkrsex7pxa'
 );
 event.relay = undefined;
 
 const withEmbeddedNote = await ndk.fetchEvent(
-    'note1zgft83adr408ngycf4hgqay3k3vyethfxc8a9wtq807waf3wwcdsys6wev'
+    'nevent1qqsrjpqwtmwy2aw0t745d6vdj6k267wjv5xjklek7ucr2pv65p2ydgspz9mhxue69uhkummnw3ezuamfdejj7qmsa3q'
 );
 withEmbeddedNote.relay = undefined;
 
@@ -49,21 +49,21 @@ const with1063 = await ndk.fetchEvent(
 );
 with1063.relay = undefined;
 
-export const Default: Story = {
+export const Kind1Event: Story = {
     args: {
         ndk,
         event
     }
 };
 
-export const WithEmbeddedNote: Story = {
+export const Kind1EventWithEmbeddedNote: Story = {
     args: {
         ndk,
         event: withEmbeddedNote
     }
 };
 
-export const With1063Event: Story = {
+export const Kind1063Event: Story = {
     args: {
         ndk,
         event: with1063

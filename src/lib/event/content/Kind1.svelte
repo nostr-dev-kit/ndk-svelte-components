@@ -21,7 +21,7 @@
 
     export let event, maxLength;
     export let ndk: NDK;
-    export let anchorId = false;
+    export let anchorId:string | null = null;
     export let showEntire = false;
     export let showMedia = true;
 
