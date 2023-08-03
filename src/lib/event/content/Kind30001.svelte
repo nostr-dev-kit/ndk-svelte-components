@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { NDKEvent, NDKList } from "@nostr-dev-kit/ndk";
+    import type { NDKList } from "@nostr-dev-kit/ndk";
 
     export let list: NDKList;
 </script>

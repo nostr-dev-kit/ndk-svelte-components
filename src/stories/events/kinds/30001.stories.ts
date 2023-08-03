@@ -8,7 +8,7 @@ import Kind30001 from '../../../lib/event/content/Kind30001.svelte';
  */
 
 const meta = {
-    title: 'Event/Kinds/Lists/30001',
+    title: 'Event/Kinds/30001',
     component: Kind30001,
     tags: ['autodocs'],
     argTypes: {
@@ -19,11 +19,11 @@ const meta = {
             description:
                 'The NDK instance you want to use. This should be already connected to relays.'
         },
-        id: {
+        list: {
             control: { type: null },
-            type: { name: 'other', value: 'Event', required: true },
-            table: { type: { summary: 'string' } },
-            description: 'The event ID you want to render in hex or bech32 format'
+            type: { name: 'other', value: 'NDKList', required: true },
+            table: { type: { summary: 'NDKList' } },
+            description: 'The kind 30001 event ID want to render'
         }
     }
 } satisfies Meta<Kind30001>;
