@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let value
+    export let value;
     export let showMedia = false;
 
     let hidden = false
