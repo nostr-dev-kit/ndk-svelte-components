@@ -1,15 +1,17 @@
 <script lang="ts">
     import type { NDKList } from "@nostr-dev-kit/ndk";
     import type NDK from '@nostr-dev-kit/ndk';
-    import EventCard from "../EventCard.svelte";
+    import Avatar from "$lib/user/Avatar.svelte";
+    import Name from "$lib/user/Name.svelte";
 
     export let ndk:NDK;
     export let list: NDKList;
 </script>
 
 {#each list.items as tag (tag[1])}
-    <div class='list-item'>
-        <EventCard {ndk} id={tag[1]} />
+    <div class="list-item">
+        <Avatar ndk={ndk} pubkey={tag[1]} class="list-item--avatar" />
+        <Name ndk={ndk} pubkey={tag[1]} class="list-item--name" />
     </div>
 {/each}
 
