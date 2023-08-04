@@ -4,11 +4,11 @@ import NDK from '@nostr-dev-kit/ndk';
 import Kind1Component from '../../../lib/event/content/Kind1.svelte';
 
 /**
- * Renders an event's card
+ * Renders a Kind 1 event content
  */
 
 const meta = {
-    title: 'Event/Kinds/1',
+    title: 'Event/Kinds/Kind 1',
     component: Kind1Component,
     tags: ['autodocs'],
     argTypes: {

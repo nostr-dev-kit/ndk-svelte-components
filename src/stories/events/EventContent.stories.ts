@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/svelte';
 import NDK from '@nostr-dev-kit/ndk';
 
 import EventContent from '../../lib/event/content/EventContent.svelte';
-import Kind1 from './kinds/1.stories';
 /**
  * Renders an event's content
  */
@@ -44,11 +43,6 @@ const withEmbeddedNote = await ndk.fetchEvent(
 );
 withEmbeddedNote.relay = undefined;
 
-const with1063 = await ndk.fetchEvent(
-    'nevent1qqs2vrx4ffqyq42yge95v3rfyr5gqr9z3pqpe7j7dymlk4lv3pwse6qfcjqkn'
-);
-with1063.relay = undefined;
-
 export const Kind1Event: Story = {
     args: {
         ndk,
@@ -60,12 +54,5 @@ export const Kind1EventWithEmbeddedNote: Story = {
     args: {
         ndk,
         event: withEmbeddedNote
-    }
-};
-
-export const Kind1063Event: Story = {
-    args: {
-        ndk,
-        event: with1063
     }
 };
