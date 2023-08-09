@@ -1,11 +1,11 @@
-export * from './utils';
+export * from "./utils";
 
-import RelayList from './relay/RelayList.svelte';
-import Avatar from './user/Avatar.svelte';
-import Name from './user/Name.svelte';
+import RelayList from "./relay/RelayList.svelte";
+import Avatar from "./user/Avatar.svelte";
+import Name from "./user/Name.svelte";
 
-import EventContent from './event/content/EventContent.svelte';
-import EventCard from './event/EventCard.svelte';
+import EventContent from "./event/content/EventContent.svelte";
+import EventCard from "./event/EventCard.svelte";
 
 export {
     // Event
@@ -17,5 +17,5 @@ export {
     Name,
 
     // Relay
-    RelayList
+    RelayList,
 };
