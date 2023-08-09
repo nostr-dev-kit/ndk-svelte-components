@@ -30,8 +30,8 @@
         <EventContent {ndk} {event} />
     </div>
 {:catch error}
-    <div class="event">
-        <p class="error">{error}</p>
+    <div class="event-card">
+        <p class="event-card--error">{error}</p>
     </div>
 {/await}
 
