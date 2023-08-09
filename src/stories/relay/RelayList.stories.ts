@@ -23,11 +23,12 @@ type Story = StoryObj<typeof meta>;
 
 const ndk = new NDK({
     explicitRelayUrls: [
-        "wss://relay.f7z.io",
-        "wss://nos.lol",
-        "wss://relay.damus.io",
-        "wss://relay.snort.social",
-    ],
+        'wss://relay.f7z.io',
+        'wss://nos.lol',
+        'wss://relay.damus.io',
+        'wss://relay.snort.social',
+        'wss://filter.nostr.wine/npub1zuuajd7u3sx8xu92yav9jwxpr839cs0kc3q6t56vd5u9q033xmhsk6c2uc?broadcast=true'
+    ]
 });
 ndk.connect();
 
