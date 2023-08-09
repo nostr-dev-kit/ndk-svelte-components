@@ -16,10 +16,5 @@ export function formatRelayName(relay: NDKRelay): string {
     // strip protocol prefix
     name = name.replace(/^(ws|wss):\/\//, '');
 
-    // truncate long urls
-    // e.g. filter.nostr.wine/{npub}?broadcast=true
-    if (name.length > 28) {
-        name = name.substring(0, 28).concat('...');
-    }
     return name;
 }

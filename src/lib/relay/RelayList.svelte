@@ -110,6 +110,9 @@
 <style>
     .relay-name {
         font-weight: 400;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .relay-button {
@@ -134,7 +137,7 @@
     }
 
     .relay-status {
-        display: inline-block;
+        flex-shrink: 0;
         width: 10px;
         height: 10px;
         border-radius: 50%;
