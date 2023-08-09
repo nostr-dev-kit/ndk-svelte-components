@@ -31,36 +31,37 @@
         }
         npub = user?.npub;
     }
-
-    let defaultStyle = 'width:64px; height: 64px; background-color: #ccc;';
 </script>
 
 {#await user?.fetchProfile()}
     <img
-        alt=""
-        title=""
-        class="animate-pulse {$$props.class}"
-        style={!$$props.class && !$$props.style ? defaultStyle : $$props.style}
+        alt="Loading avatar for {npub}"
+        class="avatar avatar--loading {$$props.class}"
+        style={$$props.style}
     />
 {:then value}
     <img
         src={user?.profile?.image??"https://placehold.co/400/ccc/ccc/webp"}
-        alt=""
-        title=""
-        class={$$props.class}
-        style={!$$props.class && !$$props.style ? defaultStyle : $$props.style}
+        alt="Avatar for {npub}"
+        class="avatar avatar--image {$$props.class}"
+        style={$$props.style}
     />
 {:catch error}
     <img
-        alt={`Error loading avatar for ${npub}`}
-        title={`Error loading avatar for ${npub}`}
-        class={$$props.class}
-        style={!$$props.class && !$$props.style ? defaultStyle : $$props.style}
+        alt="Error loading avatar for {npub}"
+        class="avatar avatar--error {$$props.class}"
+        style={$$props.style}
     />
 {/await}
 
-<style>
-    .animate-pulse {
+<style lang="postcss">
+    .avatar {
+        width: 64px;
+        height: 64px;
+        background-color: #ccc;
+    }
+
+    .avatar--loading {
         animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
 
@@ -73,4 +74,5 @@
             opacity: 0.5;
         }
     }
+
 </style>

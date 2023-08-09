@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/svelte';
 import NDK from '@nostr-dev-kit/ndk';
 
-import EventCard from '../../lib/event/EventCard.svelte';
+import Kind1Component from '../../../lib/event/content/Kind1.svelte';
 
 /**
- * Renders an event's card
+ * Renders a Kind 1 event content
  */
 
 const meta = {
-    title: 'Event/EventCard',
-    component: EventCard,
+    title: 'Event/Kinds/Kind 1',
+    component: Kind1Component,
     tags: ['autodocs'],
     argTypes: {
         ndk: {
@@ -19,14 +19,14 @@ const meta = {
             description:
                 'The NDK instance you want to use. This should be already connected to relays.'
         },
-        id: {
+        event: {
             control: { type: null },
-            type: { name: 'other', value: 'Event', required: true },
-            table: { type: { summary: 'string' } },
-            description: 'The event ID you want to render in hex or bech32 format'
+            type: { name: 'other', value: 'NDKEvent', required: true },
+            table: { type: { summary: 'NDKEvent' } },
+            description: 'The event you want to render'
         }
     }
-} satisfies Meta<EventCard>;
+} satisfies Meta<Kind1Component>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -35,20 +35,13 @@ const ndk = new NDK({ explicitRelayUrls: ['wss://nos.lol'] });
 await ndk.connect();
 
 const id = 'note194n247lecqgcskk5rmmfgrapt4jx7ppq64xec0eca3s4ta3hwkrsex7pxa';
+const event = await ndk.fetchEvent(id);
 
-const withEmbeddedNoteId = 'nevent1qqsrjpqwtmwy2aw0t745d6vdj6k267wjv5xjklek7ucr2pv65p2ydgspz9mhxue69uhkummnw3ezuamfdejj7qmsa3q'
+event.relay = undefined;
 
-export const Kind1Event: Story = {
+export const Kind1: Story = {
     args: {
         ndk,
-        id
-    }
-};
-
-
-export const Kind1EventWithEmbeddedNote: Story = {
-    args: {
-        ndk,
-        id: withEmbeddedNoteId
+        event
     }
 };

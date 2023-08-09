@@ -39,13 +39,17 @@
 <span class="name">
     {#if user}
         {#await user.fetchProfile()}
-            <span class={$$props.class} style={$$props.style}>[{truncatedBech32(_npub)}]</span>
-        {:then value}
-            <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <!-- svelte-ignore a11y-missing-attribute -->
-            <a
-                class={$$props.class}
+            <span
+                class="name--loading {$$props.class}"
                 style={$$props.style}
+            >
+                [{truncatedBech32(_npub)}]
+            </span>
+        {:then value}
+            <button
+                class="name--button {$$props.class}"
+                style={$$props.style}
+                tabindex="0"
                 on:click|preventDefault|stopPropagation={() => {
                     dispatch('click', user);
                 }}
@@ -54,9 +58,26 @@
                     user.profile?.name ||
                     truncatedNip05(user.profile) ||
                     truncatedBech32(user.npub)}
-            </a>
+            </button>
         {:catch error}
-            <span class={$$props.class} style={$$props.style}>[{truncatedBech32(_npub)}]</span>
+            <span
+                class="name--error {$$props.class}"
+                style={$$props.style}
+            >
+                [{truncatedBech32(_npub)}]
+            </span>
         {/await}
     {/if}
 </span>
+
+<style lang="postcss">
+    .name--button {
+        background: none;
+        color: inherit;
+        border:none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+    }
+</style>

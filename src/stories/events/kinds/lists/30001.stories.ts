@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/svelte';
 import NDK, {  NDKList } from '@nostr-dev-kit/ndk';
 
-import Kind30001 from '../../../lib/event/content/Kind30001.svelte';
+import Kind30001 from '../../../../lib/event/content/Kind30001.svelte';
 
 /**
- * Renders an event's card
+ * Renders a Kind 30001 (Categorized Bookmarks) list.
  */
 
 const meta = {
-    title: 'Event/Kinds/Lists/30001',
+    title: 'Event/Kinds/Lists/Kind 30001',
     component: Kind30001,
     tags: ['autodocs'],
     argTypes: {
@@ -19,11 +19,11 @@ const meta = {
             description:
                 'The NDK instance you want to use. This should be already connected to relays.'
         },
-        id: {
+        list: {
             control: { type: null },
-            type: { name: 'other', value: 'Event', required: true },
-            table: { type: { summary: 'string' } },
-            description: 'The event ID you want to render in hex or bech32 format'
+            type: { name: 'other', value: 'NDKList', required: true },
+            table: { type: { summary: 'NDKList' } },
+            description: 'The kind 30001 event ID want to render'
         }
     }
 } satisfies Meta<Kind30001>;
@@ -34,7 +34,7 @@ type Story = StoryObj<typeof meta>;
 const ndk = new NDK({ explicitRelayUrls: ['wss://nos.lol'] });
 await ndk.connect();
 
-const id = 'naddr1qq9ygctfd3ujq4z0g38syg86np9a0kajstc8u9h846rmy6320wdepdeydfz8w8cv7kh9sqv02gpsgqqqw5csduh0vs';
+const id = 'naddr1qqv5ummnw3fks6tjwssyxatnw3hk6etjypfx2anfv4msygxv35rjalwvvahuhtq57mxksf0dcdtku40t0p4z4967uq62dgpxevpsgqqqw5cswq0n3l';
 const list = NDKList.from(await ndk.fetchEvent(id));
 
 export const Default: Story = {
