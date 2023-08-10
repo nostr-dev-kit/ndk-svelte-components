@@ -56,8 +56,6 @@
 
 <style lang="postcss">
     .avatar {
-        width: 64px;
-        height: 64px;
         background-color: #ccc;
     }
 
