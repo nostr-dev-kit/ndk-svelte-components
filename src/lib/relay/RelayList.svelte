@@ -71,7 +71,8 @@
                 <span class="relay-name"><RelayName {relay} /></span>
                 {#if relay.activeSubscriptions.size > 0}
                     <div class="relay-subscriptions">
-                        {relay.activeSubscriptions.size} subscriptions
+                        {relay.activeSubscriptions.size}
+                        {relay.activeSubscriptions.size === 1 ? 'subscription' : 'subscriptions'}
                     </div>
                 {/if}
             </button>
@@ -109,6 +110,9 @@
 <style>
     .relay-name {
         font-weight: 400;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .relay-button {
@@ -133,7 +137,7 @@
     }
 
     .relay-status {
-        display: inline-block;
+        flex-shrink: 0;
         width: 10px;
         height: 10px;
         border-radius: 50%;

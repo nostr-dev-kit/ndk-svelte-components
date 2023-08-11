@@ -2,7 +2,6 @@
     import type NDK from '@nostr-dev-kit/ndk';
     import { NDKList, type NDKEvent } from '@nostr-dev-kit/ndk';
     import { NDKArticle } from '@nostr-dev-kit/ndk';
-
     import Kind1 from './Kind1.svelte';
     // import Kind40 from "./Kind40.svelte"
     import Kind1063 from './Kind1063.svelte';

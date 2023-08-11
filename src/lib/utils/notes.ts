@@ -20,7 +20,7 @@ export const urlIsMedia = (url) =>
     !url.match(/\.(apk|docx|xlsx|csv|dmg)/) && last(url.split('://')).includes('/');
 
 export const parseContent = ({ content, tags = [], html = false }) => {
-    const result = [];
+    const result: string[] = [];
     let text = content.trim();
     let buffer = '';
 

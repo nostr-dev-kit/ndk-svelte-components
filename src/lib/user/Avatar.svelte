@@ -55,6 +55,10 @@
 {/await}
 
 <style lang="postcss">
+    .avatar {
+        background-color: #ccc;
+    }
+
     .avatar--loading {
         animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
@@ -68,4 +72,5 @@
             opacity: 0.5;
         }
     }
+
 </style>

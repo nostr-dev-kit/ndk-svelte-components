@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/svelte';
-import NDK from '@nostr-dev-kit/ndk';
+import type { Meta, StoryObj } from "@storybook/svelte";
+import NDK from "@nostr-dev-kit/ndk";
 
-import Avatar from '../../lib/user/Avatar.svelte';
+import Avatar from "../../lib/user/Avatar.svelte";
 
 /**
  * Renders a user's avatar image using the `user.userProfile.image` value from their latest kind `0` event.
@@ -10,29 +10,29 @@ import Avatar from '../../lib/user/Avatar.svelte';
  */
 
 const meta = {
-    title: 'User/Avatar',
+    title: "User/Avatar",
     component: Avatar,
-    tags: ['autodocs'],
+    tags: ["autodocs"],
     argTypes: {
         ndk: {
             control: { type: null },
-            type: { name: 'other', value: 'NDK', required: true },
-            table: { type: { summary: 'NDK' } },
+            type: { name: "other", value: "NDK", required: true },
+            table: { type: { summary: "NDK" } },
             description:
-                'The NDK instance you want to use. This should be already connected to relays.'
+                "The NDK instance you want to use. This should be already connected to relays.",
         },
         npub: {
-            control: 'text',
-            type: 'string',
-            table: { type: { summary: 'string' } },
-            description: "The user's npub. Only one of `npub`, `pubkey`, or `user` is required."
+            control: "text",
+            type: "string",
+            table: { type: { summary: "string" } },
+            description: "The user's npub. Only one of `npub`, `pubkey`, or `user` is required.",
         },
         pubkey: {
-            control: 'text',
-            type: 'string',
-            table: { type: { summary: 'string' } },
+            control: "text",
+            type: "string",
+            table: { type: { summary: "string" } },
             description:
-                "The user's hex pubkey. Only one of `npub`, `pubkey`, or `user` is required."
+                "The user's hex pubkey. Only one of `npub`, `pubkey`, or `user` is required.",
         },
         user: {
             control: { type: null },
@@ -58,7 +58,7 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const ndk = new NDK({ explicitRelayUrls: ['wss://purplepag.es'] });
+const ndk = new NDK({ explicitRelayUrls: ["wss://purplepag.es"] });
 ndk.connect();
 
 export const Default: Story = {

@@ -1,12 +1,12 @@
-import { create } from '@storybook/theming/create';
+import { create } from "@storybook/theming/create";
 
 export default create({
-    base: 'light',
+    base: "light",
     // Typography
     fontBase: '"Inter", Arial, Helvetica, sans-serif',
-    fontCode: 'monospace',
+    fontCode: "monospace",
 
-    brandTitle: 'NDK Svelte Components',
-    brandUrl: 'https://svelte-components.ndk.fyi',
-    brandTarget: '_self'
+    brandTitle: "NDK Svelte Components",
+    brandUrl: "https://svelte-components.ndk.fyi",
+    brandTarget: "_self",
 });
