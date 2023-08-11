@@ -7,7 +7,7 @@ import Kind1Component from "../../../lib/event/content/Kind1.svelte";
  */
 
 const meta = {
-    title: "Event/Kinds/Kind 1",
+    title: "Event/Kinds/Kind 1 - Text note",
     component: Kind1Component,
     tags: ["autodocs"],
     argTypes: {

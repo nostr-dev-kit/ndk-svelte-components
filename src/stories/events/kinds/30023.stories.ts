@@ -8,7 +8,7 @@ import Kind30023Component from "../../../lib/event/content/Kind30023.svelte";
  */
 
 const meta = {
-    title: "Event/Kinds/Kind 30023",
+    title: "Event/Kinds/Kind 30023 - Long-form articles",
     component: Kind30023Component,
     tags: ["autodocs"],
     argTypes: {

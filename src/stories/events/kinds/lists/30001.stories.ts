@@ -7,7 +7,7 @@ import Kind30001 from "../../../../lib/event/content/Kind30001.svelte";
  */
 
 const meta = {
-    title: "Event/Kinds/Lists/Kind 30001",
+    title: "Event/Kinds/Lists/Kind 30001 - Categorized Bookmarks",
     component: Kind30001,
     tags: ["autodocs"],
     argTypes: {

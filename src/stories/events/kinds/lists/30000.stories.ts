@@ -7,7 +7,7 @@ import Kind30000 from "../../../../lib/event/content/Kind30000.svelte";
  */
 
 const meta = {
-    title: "Event/Kinds/Lists/Kind 30000",
+    title: "Event/Kinds/Lists/Kind 30000 - Categorized People",
     component: Kind30000,
     tags: ["autodocs"],
     argTypes: {
