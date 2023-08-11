@@ -1,18 +1,14 @@
-import { unified } from 'unified';
-import remarkParse from 'remark-parse';
-import remarkRehype from 'remark-rehype';
-import remarkGfm from 'remark-gfm';
-import rehypeSanitize from 'rehype-sanitize';
-import rehypeStringify from 'rehype-stringify';
+import { marked } from 'marked';
+import { gfmHeadingId } from 'marked-gfm-heading-id';
+import { mangle } from 'marked-mangle';
+import DOMPurify from 'isomorphic-dompurify';
 
-export async function cleanMarkdown(content: string): Promise<string> {
-    const file = await unified()
-        .use(remarkParse)
-        .use(remarkGfm)
-        .use(remarkRehype)
-        .use(rehypeSanitize)
-        .use(rehypeStringify)
-        .process(content);
+export function markdownToHtml(content: string): string {
+    marked.use(mangle());
+    marked.use(gfmHeadingId());
 
-    return String(file);
+    return DOMPurify.sanitize(
+        // eslint-disable-next-line no-misleading-character-class
+        marked.parse(content.replace(/^[\u200B\u200C\u200D\u200E\u200F\uFEFF]/, ''))
+    );
 }

@@ -36,7 +36,10 @@ await ndk.connect();
 
 const id = 'note194n247lecqgcskk5rmmfgrapt4jx7ppq64xec0eca3s4ta3hwkrsex7pxa';
 
-const withEmbeddedNoteId = 'nevent1qqsrjpqwtmwy2aw0t745d6vdj6k267wjv5xjklek7ucr2pv65p2ydgspz9mhxue69uhkummnw3ezuamfdejj7qmsa3q'
+const withEmbeddedNoteId =
+    'nevent1qqsrjpqwtmwy2aw0t745d6vdj6k267wjv5xjklek7ucr2pv65p2ydgspz9mhxue69uhkummnw3ezuamfdejj7qmsa3q';
+
+const withImage = 'note1np37t0mgh0ucuujf7lm7wawz42d8krcwc95cng9090yglcltpk7sgat8rs';
 
 export const Kind1Event: Story = {
     args: {
@@ -45,10 +48,16 @@ export const Kind1Event: Story = {
     }
 };
 
-
 export const Kind1EventWithEmbeddedNote: Story = {
     args: {
         ndk,
         id: withEmbeddedNoteId
+    }
+};
+
+export const Kind1EventWithImage: Story = {
+    args: {
+        ndk,
+        id: withImage
     }
 };

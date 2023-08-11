@@ -27,7 +27,7 @@
         try {
             user = ndk.getUser(opts);
         } catch (e) {
-            console.error(`error trying to get user`, {opts}, e);
+            console.error(`error trying to get user`, { opts }, e);
         }
         npub = user?.npub;
     }
@@ -41,7 +41,7 @@
     />
 {:then value}
     <img
-        src={user?.profile?.image??"https://placehold.co/400/ccc/ccc/webp"}
+        src={user?.profile?.image ?? 'https://placehold.co/400/ccc/ccc/webp'}
         alt="Avatar for {npub}"
         class="avatar avatar--image {$$props.class}"
         style={$$props.style}
@@ -55,12 +55,6 @@
 {/await}
 
 <style lang="postcss">
-    .avatar {
-        width: 64px;
-        height: 64px;
-        background-color: #ccc;
-    }
-
     .avatar--loading {
         animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
@@ -74,5 +68,4 @@
             opacity: 0.5;
         }
     }
-
 </style>

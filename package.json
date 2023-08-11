@@ -71,17 +71,12 @@
         "@nostr-dev-kit/ndk": "file:../ndk",
         "classnames": "^2.3.2",
         "hurdak": "github:ConsignCloud/hurdak",
+        "isomorphic-dompurify": "^1.8.0",
+        "marked": "^7.0.1",
+        "marked-gfm-heading-id": "^3.0.6",
+        "marked-mangle": "^1.1.2",
         "nostr-tools": "^1.14.0",
-        "marked": "^7.0.0",
         "ramda": "^0.29.0",
-        "rehype-autolink-headings": "^6.1.1",
-        "rehype-sanitize": "^5.0.1",
-        "rehype-slug": "^5.1.0",
-        "rehype-stringify": "^9.0.3",
-        "remark-gfm": "^3.0.1",
-        "remark-parse": "^10.0.2",
-        "remark-rehype": "^10.1.0",
-        "svelte-preprocess": "^5.0.4",
-        "unified": "^10.1.2"
+        "svelte-preprocess": "^5.0.4"
     }
 }

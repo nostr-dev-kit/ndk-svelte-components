@@ -1,25 +1,47 @@
 <script lang="ts">
     import type { NDKArticle } from '@nostr-dev-kit/ndk';
     import type NDK from '@nostr-dev-kit/ndk';
-    import { cleanMarkdown } from '$lib/utils/markdown';
+    import NoteContentNewline from './NoteContentNewline.svelte';
+    import NoteContentTopic from './NoteContentTopic.svelte';
+    import NoteContentLink from './NoteContentLink.svelte';
+
+    import EventCard from '../EventCard.svelte';
+    import NoteContentPerson from './NoteContentPerson.svelte';
+    import { LINK, HTML, NEWLINE, TOPIC, parseContent } from '../../utils/notes.js';
+    import { markdownToHtml } from '$lib/utils/markdown';
 
     export let ndk: NDK;
     export let article: NDKArticle;
-    export let maxLength: number;
-    export let showEntire: boolean = false;
     export let showMedia: boolean = true;
+    export let anchorId: string | null = null;
+
+    const htmlContent = markdownToHtml(article.content);
+    const parsed = parseContent({ content: htmlContent, tags: article.tags, html: true });
 </script>
 
 <div class="article">
     <h1 class="article-title">{article.title}</h1>
     <div class="article-content">
-        {#await cleanMarkdown(article.content)}
-            <span>Loading article...</span>
-        {:then value}
-            {@html value}
-        {:catch error}
-            <span>Error loading article: {error}</span>
-        {/await}
+        {#each parsed as { type, value }, i}
+            {#if type === NEWLINE}
+                <NoteContentNewline {value} />
+            {:else if type === HTML}
+                {@html value}
+            {:else if type === TOPIC}
+                <NoteContentTopic {value} />
+            {:else if type === LINK}
+                <NoteContentLink {value} {showMedia} />
+            {:else if type.match(/^nostr:np(rofile|ub)$/)}
+                <NoteContentPerson {ndk} {value} on:click />
+            {:else if type.startsWith('nostr:') && showMedia && value.id !== anchorId}
+                <EventCard {ndk} id={value.id} relays={value.relays} />
+            {:else if type.startsWith('nostr:')}
+                {`UNHANDLED NOSTR: LINK: ${type}`}
+                <!-- <NoteContentEntity {value} /> -->
+            {:else}
+                {@html value}
+            {/if}
+        {/each}
     </div>
 </div>
 
