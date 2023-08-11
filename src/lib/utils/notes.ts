@@ -1,28 +1,28 @@
-import { last, pluck, identity } from 'ramda';
-import { nip19 } from 'nostr-tools';
-import { first } from 'hurdak/lib/hurdak';
+import { last, pluck, identity } from "ramda";
+import { nip19 } from "nostr-tools";
+import { first } from "hurdak/lib/hurdak";
 
-export const NEWLINE = 'newline';
-export const TEXT = 'text';
-export const TOPIC = 'topic';
-export const LINK = 'link';
-export const HTML = 'html';
-export const INVOICE = 'invoice';
-export const NOSTR_NOTE = 'nostr:note';
-export const NOSTR_NEVENT = 'nostr:nevent';
-export const NOSTR_NPUB = 'nostr:npub';
-export const NOSTR_NPROFILE = 'nostr:nprofile';
-export const NOSTR_NADDR = 'nostr:naddr';
+export const NEWLINE = "newline";
+export const TEXT = "text";
+export const TOPIC = "topic";
+export const LINK = "link";
+export const HTML = "html";
+export const INVOICE = "invoice";
+export const NOSTR_NOTE = "nostr:note";
+export const NOSTR_NEVENT = "nostr:nevent";
+export const NOSTR_NPUB = "nostr:npub";
+export const NOSTR_NPROFILE = "nostr:nprofile";
+export const NOSTR_NADDR = "nostr:naddr";
 
-export const fromNostrURI = (s) => s.replace(/^[\w\+]+:\/?\/?/, '');
+export const fromNostrURI = (s) => s.replace(/^[\w\+]+:\/?\/?/, "");
 
 export const urlIsMedia = (url) =>
-    !url.match(/\.(apk|docx|xlsx|csv|dmg)/) && last(url.split('://')).includes('/');
+    !url.match(/\.(apk|docx|xlsx|csv|dmg)/) && last(url.split("://")).includes("/");
 
 export const parseContent = ({ content, tags = [], html = false }) => {
     const result: string[] = [];
     let text = content.trim();
-    let buffer = '';
+    let buffer = "";
 
     const parseNewline = () => {
         if (html) return;
@@ -45,12 +45,12 @@ export const parseContent = ({ content, tags = [], html = false }) => {
                 const relays = [url].filter(identity);
 
                 let type, data, entity;
-                if (tag === 'p') {
-                    type = 'nprofile';
+                if (tag === "p") {
+                    type = "nprofile";
                     data = { pubkey: value, relays };
                     entity = nip19.nprofileEncode(data);
                 } else {
-                    type = 'nevent';
+                    type = "nevent";
                     data = { id: value, relays, pubkey: null };
                     entity = nip19.neventEncode(data);
                 }
@@ -71,7 +71,7 @@ export const parseContent = ({ content, tags = [], html = false }) => {
 
     const parseBech32 = () => {
         const bech32 = first(
-            text.match(/^(web\+)?(nostr:)?\/?\/?n(event|ote|profile|pub|addr)1[\d\w]+/i)
+            text.match(/^(web\+)?(nostr:)?\/?\/?n(event|ote|profile|pub|addr)1[\d\w]+/i),
         );
 
         if (bech32) {
@@ -80,9 +80,9 @@ export const parseContent = ({ content, tags = [], html = false }) => {
                 const { type, data } = nip19.decode(entity) as { type: string; data: object };
 
                 let value = data;
-                if (type === 'note') {
+                if (type === "note") {
                     value = { id: data };
-                } else if (type === 'npub') {
+                } else if (type === "npub") {
                     value = { pubkey: data };
                 }
 
@@ -105,14 +105,14 @@ export const parseContent = ({ content, tags = [], html = false }) => {
     const parseUrl = () => {
         if (html) return;
         const raw = first(
-            text.match(/^([a-z\+:]{2,30}:\/\/)?[^\s]+\.[a-z]{2,6}[^\s]*[^\.!?,:\s]/gi)
+            text.match(/^([a-z\+:]{2,30}:\/\/)?[^\s]+\.[a-z]{2,6}[^\s]*[^\.!?,:\s]/gi),
         );
 
         // Skip url if it's just the end of a filepath
         if (raw) {
             const prev = last(result);
 
-            if (prev?.type === 'text' && prev.value.endsWith('/')) {
+            if (prev?.type === "text" && prev.value.endsWith("/")) {
                 return;
             }
 
@@ -123,8 +123,8 @@ export const parseContent = ({ content, tags = [], html = false }) => {
                 return;
             }
 
-            if (!url.match('://')) {
-                url = 'https://' + url;
+            if (!url.match("://")) {
+                url = "https://" + url;
             }
 
             return [LINK, raw, { url, isMedia: urlIsMedia(url) }];
@@ -153,8 +153,8 @@ export const parseContent = ({ content, tags = [], html = false }) => {
 
         if (part) {
             if (buffer) {
-                result.push({ type: 'text', value: buffer });
-                buffer = '';
+                result.push({ type: "text", value: buffer });
+                buffer = "";
             }
 
             const [type, raw, value] = part;
@@ -191,7 +191,7 @@ export const truncateContent = (content, { showEntire, maxLength, showMedia = fa
         const isText =
             [TOPIC, TEXT].includes(part.type) || (part.type === LINK && !part.value.isMedia);
         const isMedia =
-            part.type === INVOICE || part.type.startsWith('nostr:') || part.value.isMedia;
+            part.type === INVOICE || part.type.startsWith("nostr:") || part.value.isMedia;
 
         if (isText) {
             length += part.value.length;
@@ -205,7 +205,7 @@ export const truncateContent = (content, { showEntire, maxLength, showMedia = fa
 
         if (length > truncateAt && i < content.length - 1) {
             if (isText || (isMedia && !showMedia)) {
-                result.push({ type: TEXT, value: '...' });
+                result.push({ type: TEXT, value: "..." });
             }
 
             return false;
@@ -219,6 +219,6 @@ export const truncateContent = (content, { showEntire, maxLength, showMedia = fa
 
 export const getLinks = (parts) =>
     pluck(
-        'value',
-        parts.filter((x) => x.type === LINK && x.isMedia)
+        "value",
+        parts.filter((x) => x.type === LINK && x.isMedia),
     );

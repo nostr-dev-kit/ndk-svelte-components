@@ -36,23 +36,23 @@ const meta = {
         },
         user: {
             control: { type: null },
-            type: { name: 'other', value: 'NDKUser', required: false },
-            table: { type: { summary: 'NDKUser' } },
-            description: 'An NDKUser object. Only one of `npub`, `pubkey`, or `user` is required.'
+            type: { name: "other", value: "NDKUser", required: false },
+            table: { type: { summary: "NDKUser" } },
+            description: "An NDKUser object. Only one of `npub`, `pubkey`, or `user` is required.",
         },
         class: {
-            control: 'text',
-            type: 'string',
-            table: { type: { summary: 'string' } },
-            description: 'Any classes you want applied to the `<img>` HTML element'
+            control: "text",
+            type: "string",
+            table: { type: { summary: "string" } },
+            description: "Any classes you want applied to the `<img>` HTML element",
         },
         style: {
-            control: 'text',
-            type: 'string',
-            table: { type: { summary: 'string' } },
-            description: 'Any styles you want applied to the `<img>` HTML element'
-        }
-    }
+            control: "text",
+            type: "string",
+            table: { type: { summary: "string" } },
+            description: "Any styles you want applied to the `<img>` HTML element",
+        },
+    },
 } satisfies Meta<Avatar>;
 
 export default meta;
@@ -64,15 +64,15 @@ ndk.connect();
 export const Default: Story = {
     args: {
         ndk: ndk,
-        npub: 'npub1zuuajd7u3sx8xu92yav9jwxpr839cs0kc3q6t56vd5u9q033xmhsk6c2uc',
-        style: 'width: 64px; height: 64px;'
-    }
+        npub: "npub1zuuajd7u3sx8xu92yav9jwxpr839cs0kc3q6t56vd5u9q033xmhsk6c2uc",
+        style: "width: 64px; height: 64px;",
+    },
 };
 
 export const Nonexistent: Story = {
     args: {
         ndk: ndk,
-        npub: 'npub1vqtlp64gdfdqr64xq9g7t8qc9kyyns7nd23nnsf3mv94aqht8ensn29e34',
-        style: 'width: 64px; height: 64px;'
-    }
+        npub: "npub1vqtlp64gdfdqr64xq9g7t8qc9kyyns7nd23nnsf3mv94aqht8ensn29e34",
+        style: "width: 64px; height: 64px;",
+    },
 };
