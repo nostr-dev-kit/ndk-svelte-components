@@ -1,14 +1,14 @@
 <script lang="ts">
-    import type { NDKArticle } from '@nostr-dev-kit/ndk';
-    import type NDK from '@nostr-dev-kit/ndk';
-    import NoteContentNewline from './NoteContentNewline.svelte';
-    import NoteContentTopic from './NoteContentTopic.svelte';
-    import NoteContentLink from './NoteContentLink.svelte';
+    import type { NDKArticle } from "@nostr-dev-kit/ndk";
+    import type NDK from "@nostr-dev-kit/ndk";
+    import NoteContentNewline from "./NoteContentNewline.svelte";
+    import NoteContentTopic from "./NoteContentTopic.svelte";
+    import NoteContentLink from "./NoteContentLink.svelte";
 
-    import EventCard from '../EventCard.svelte';
-    import NoteContentPerson from './NoteContentPerson.svelte';
-    import { LINK, HTML, NEWLINE, TOPIC, parseContent } from '../../utils/notes.js';
-    import { markdownToHtml } from '$lib/utils/markdown';
+    import EventCard from "../EventCard.svelte";
+    import NoteContentPerson from "./NoteContentPerson.svelte";
+    import { LINK, HTML, NEWLINE, TOPIC, parseContent } from "../../utils/notes.js";
+    import { markdownToHtml } from "$lib/utils/markdown";
 
     export let ndk: NDK;
     export let article: NDKArticle;
@@ -33,10 +33,9 @@
                 <NoteContentLink {value} {showMedia} />
             {:else if type.match(/^nostr:np(rofile|ub)$/)}
                 <NoteContentPerson {ndk} {value} on:click />
-            {:else if type.startsWith('nostr:') && showMedia && value.id !== anchorId}
+            {:else if type.startsWith("nostr:") && showMedia && value.id !== anchorId}
                 <EventCard {ndk} id={value.id} relays={value.relays} />
-            {:else if type.startsWith('nostr:')}
-                {`UNHANDLED NOSTR: LINK: ${type}`}
+            {:else if type.startsWith("nostr:")}
                 <!-- <NoteContentEntity {value} /> -->
             {:else}
                 {@html value}
