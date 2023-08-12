@@ -35,20 +35,20 @@
 
 {#await user?.fetchProfile()}
     <img
-        alt="Loading avatar for {npub}"
+        alt=""
         class="avatar avatar--loading {$$props.class}"
         style={$$props.style}
     />
 {:then value}
     <img
-        src={user?.profile?.image ?? 'https://placehold.co/400/ccc/ccc/webp'}
-        alt="Avatar for {npub}"
+        src={user?.profile?.image??"https://placehold.co/400/ccc/ccc/webp"}
+        alt=""
         class="avatar avatar--image {$$props.class}"
         style={$$props.style}
     />
 {:catch error}
     <img
-        alt="Error loading avatar for {npub}"
+        alt=""
         class="avatar avatar--error {$$props.class}"
         style={$$props.style}
     />
