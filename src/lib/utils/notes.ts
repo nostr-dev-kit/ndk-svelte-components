@@ -6,6 +6,7 @@ export const NEWLINE = "newline";
 export const TEXT = "text";
 export const TOPIC = "topic";
 export const LINK = "link";
+export const HTML = "html";
 export const INVOICE = "invoice";
 export const NOSTR_NOTE = "nostr:note";
 export const NOSTR_NEVENT = "nostr:nevent";
@@ -18,12 +19,13 @@ export const fromNostrURI = (s) => s.replace(/^[\w\+]+:\/?\/?/, "");
 export const urlIsMedia = (url) =>
     !url.match(/\.(apk|docx|xlsx|csv|dmg)/) && last(url.split("://")).includes("/");
 
-export const parseContent = ({ content, tags = [] }) => {
+export const parseContent = ({ content, tags = [], html = false }) => {
     const result: string[] = [];
     let text = content.trim();
     let buffer = "";
 
     const parseNewline = () => {
+        if (html) return;
         const newline = first(text.match(/^\n+/));
 
         if (newline) {
@@ -101,6 +103,7 @@ export const parseContent = ({ content, tags = [] }) => {
     };
 
     const parseUrl = () => {
+        if (html) return;
         const raw = first(
             text.match(/^([a-z\+:]{2,30}:\/\/)?[^\s]+\.[a-z]{2,6}[^\s]*[^\.!?,:\s]/gi),
         );
@@ -128,8 +131,19 @@ export const parseContent = ({ content, tags = [] }) => {
         }
     };
 
+    const parseHtml = () => {
+        // Only parse out specific html tags
+        const raw = first(text.match(/^<(pre|code)>.*?<\/\1>/gis));
+
+        if (raw) {
+            return [HTML, raw, raw];
+        }
+    };
+
     while (text) {
+        // The order that this runs matters
         const part =
+            parseHtml() ||
             parseNewline() ||
             parseMention() ||
             parseTopic() ||

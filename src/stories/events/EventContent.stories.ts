@@ -38,21 +38,9 @@ const event = await ndk.fetchEvent(
 );
 event.relay = undefined;
 
-const withEmbeddedNote = await ndk.fetchEvent(
-    "nevent1qqsrjpqwtmwy2aw0t745d6vdj6k267wjv5xjklek7ucr2pv65p2ydgspz9mhxue69uhkummnw3ezuamfdejj7qmsa3q",
-);
-withEmbeddedNote.relay = undefined;
-
 export const Kind1Event: Story = {
     args: {
         ndk,
         event,
-    },
-};
-
-export const Kind1EventWithEmbeddedNote: Story = {
-    args: {
-        ndk,
-        event: withEmbeddedNote,
     },
 };

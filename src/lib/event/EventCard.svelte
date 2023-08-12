@@ -24,14 +24,19 @@
 {#await eventPromise then}
     <div class="event-card">
         <div class="event-card--header">
-            <Avatar {ndk} user={event?.author} class="event-card--avatar" />
+            <Avatar
+                {ndk}
+                user={event?.author}
+                class="event-card--avatar"
+                style="width:40px; height:40px; object-fit:cover; border-radius: 100%; margin-right: 1rem;"
+            />
             <Name {ndk} user={event?.author} class="event-card--name" />
         </div>
         <EventContent {ndk} {event} />
     </div>
 {:catch error}
-    <div class="event">
-        <p class="error">{error}</p>
+    <div class="event-card">
+        <p class="event-card--error">{error}</p>
     </div>
 {/await}
 
@@ -41,7 +46,6 @@
         flex-direction: column;
         align-items: flex-start;
         justify-content: center;
-        width: 100%;
         padding: 1rem;
         border: 1px solid var(--color-border);
         background-color: var(--color-bg);
@@ -56,13 +60,5 @@
         gap: 0.25rem;
         width: 100%;
         padding: 0;
-    }
-
-    * > :global(.event-card--avatar) {
-        width: 40px;
-        height: 40px;
-        padding: 0px;
-        margin: 0px;
-        border-radius: 100%;
     }
 </style>
