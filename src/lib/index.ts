@@ -1,11 +1,10 @@
-export * from "./utils";
-
+import EventCard from "./event/EventCard.svelte";
+import EventContent from "./event/content/EventContent.svelte";
 import RelayList from "./relay/RelayList.svelte";
 import Avatar from "./user/Avatar.svelte";
 import Name from "./user/Name.svelte";
 
-import EventContent from "./event/content/EventContent.svelte";
-import EventCard from "./event/EventCard.svelte";
+export * from "./utils";
 
 export {
     // Event

@@ -1,5 +1,5 @@
-import { writable } from "svelte/store";
 import NDK from "@nostr-dev-kit/ndk";
+import { writable } from "svelte/store";
 
 const _ndk = new NDK({
     explicitRelayUrls: [

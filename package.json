@@ -12,7 +12,8 @@
         "lint": "prettier --plugin-search-dir . --check . && eslint .",
         "format": "prettier --write .",
         "storybook": "storybook dev -p 6006",
-        "build-storybook": "storybook build"
+        "build-storybook": "storybook build",
+        "prettify": "prettier --write ."
     },
     "exports": {
         ".": {

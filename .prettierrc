@@ -1,8 +1,5 @@
 {
-    "plugins": [
-        "@trivago/prettier-plugin-sort-imports",
-        "prettier-plugin-svelte"
-    ],
+    "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-svelte"],
     "overrides": [
         {
             "files": "*.svelte",

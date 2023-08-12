@@ -1,6 +1,6 @@
-import { last, pluck, identity } from "ramda";
-import { nip19 } from "nostr-tools";
 import { first } from "hurdak/lib/hurdak";
+import { nip19 } from "nostr-tools";
+import { last, pluck, identity } from "ramda";
 
 export const NEWLINE = "newline";
 export const TEXT = "text";
@@ -71,7 +71,7 @@ export const parseContent = ({ content, tags = [], html = false }) => {
 
     const parseBech32 = () => {
         const bech32 = first(
-            text.match(/^(web\+)?(nostr:)?\/?\/?n(event|ote|profile|pub|addr)1[\d\w]+/i),
+            text.match(/^(web\+)?(nostr:)?\/?\/?n(event|ote|profile|pub|addr)1[\d\w]+/i)
         );
 
         if (bech32) {
@@ -105,7 +105,7 @@ export const parseContent = ({ content, tags = [], html = false }) => {
     const parseUrl = () => {
         if (html) return;
         const raw = first(
-            text.match(/^([a-z\+:]{2,30}:\/\/)?[^\s]+\.[a-z]{2,6}[^\s]*[^\.!?,:\s]/gi),
+            text.match(/^([a-z\+:]{2,30}:\/\/)?[^\s]+\.[a-z]{2,6}[^\s]*[^\.!?,:\s]/gi)
         );
 
         // Skip url if it's just the end of a filepath
@@ -220,5 +220,5 @@ export const truncateContent = (content, { showEntire, maxLength, showMedia = fa
 export const getLinks = (parts) =>
     pluck(
         "value",
-        parts.filter((x) => x.type === LINK && x.isMedia),
+        parts.filter((x) => x.type === LINK && x.isMedia)
     );

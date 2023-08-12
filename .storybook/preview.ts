@@ -1,7 +1,6 @@
 import type { Preview } from "@storybook/svelte";
-import ndkTheme from "./ndk-theme";
-
 import "../src/styles/global.css";
+import ndkTheme from "./ndk-theme";
 
 const preview: Preview = {
     parameters: {
