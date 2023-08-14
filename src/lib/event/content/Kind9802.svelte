@@ -7,7 +7,6 @@
 
     export let ndk: NDK;
     export let event: NDKEvent;
-    export let anchorId, maxLength, showEntire;
     // export const showMedia = false; // Unused so far
 
     const ref = event?.tagValue("r");
