@@ -1,24 +1,47 @@
 <script lang="ts">
-    import Kind1 from './Kind1.svelte';
-    import type { NDKEvent } from '@nostr-dev-kit/ndk';
-    import type NDK from '@nostr-dev-kit/ndk';
-    // import NoteContentLink from "src/app/shared/NoteContentLink.svelte"
+    import type { NDKEvent } from "@nostr-dev-kit/ndk";
+    import type NDK from "@nostr-dev-kit/ndk";
+    import NoteContentLink from "./NoteContentLink.svelte";
+    import { urlIsMedia } from "$lib/utils/notes";
+    import DOMPurify from "isomorphic-dompurify";
 
     export let ndk: NDK;
     export let event: NDKEvent;
-    export let anchorId, maxLength, showEntire;
-    export const showMedia = undefined; // Unused so far
+    // export const showMedia = false; // Unused so far
 
-    // const ref = event?.tagValue("r");
+    const ref = event?.tagValue("r");
+    let context = event?.tagValue("context");
+    context = context?.replace(
+        event?.content as string,
+        `<span class='highlight--content'>${event?.content}</span>`,
+    );
 </script>
 
-<div class="flex flex-col gap-2 overflow-hidden text-ellipsis">
-    <div class="border-l-2 border-solid border-gray-5 pl-4">
-        <Kind1 {ndk} {event} {anchorId} {maxLength} {showEntire} />
-    </div>
+<div>
+    <blockquote class="highlight--blockquote">
+        {@html DOMPurify.sanitize(context || "")}
+    </blockquote>
 </div>
 
-<!-- {#if ref}
-        {ref}
-        <NoteContentLink {showMedia} value={{url: ref, isMedia: urlIsMedia(ref)}} />
-{/if} -->
+{#if ref}
+    <div class="highlight--reference">
+        <NoteContentLink showMedia={false} value={{ url: ref, isMedia: urlIsMedia(ref) }} />
+    </div>
+{/if}
+
+<style lang="postcss">
+    * > :global(.highlight--content) {
+        /* Bitcoin orange */
+        background-color: rgba(242, 169, 0, 0.4);
+    }
+
+    .highlight--blockquote {
+        border-left: 0.25rem solid #ccc;
+        margin-left: 0;
+        padding: 0.25rem 0 0.25rem 1rem;
+    }
+
+    .highlight--reference {
+        margin-top: 1rem;
+    }
+</style>

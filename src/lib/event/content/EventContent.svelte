@@ -6,7 +6,7 @@
     // import Kind40 from "./Kind40.svelte"
     import Kind1063 from "./Kind1063.svelte";
     // import Kind1985 from "./Kind1985.svelte"
-    // import Kind9802 from './Kind9802.svelte';
+    import Kind9802 from "./Kind9802.svelte";
     import Kind30000 from "./Kind30000.svelte";
     import Kind30001 from "./Kind30001.svelte";
     import Kind30023 from "./Kind30023.svelte";
@@ -28,7 +28,7 @@
 {:else if event.kind === 1985}
     <!-- <Kind1985 {event} {anchorId} {maxLength} {showEntire} /> -->
 {:else if event.kind === 9802}
-    <!-- <Kind9802 {ndk} {event} {anchorId} {maxLength} {showEntire} {showMedia} /> -->
+    <Kind9802 {ndk} {event} />
 {:else if event.kind === 30000}
     <Kind30000 {ndk} list={NDKList.from(event)} />
 {:else if event.kind === 30001}
