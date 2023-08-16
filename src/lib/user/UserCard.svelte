@@ -66,7 +66,7 @@
         display: flex;
         flex-direction: row;
         align-items: start;
-        gap: 2rem;
+        gap: 1rem;
         padding: 1rem;
         border: 1px solid var(--color-border);
         background-color: var(--color-bg);
