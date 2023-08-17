@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { NDKUser } from '@nostr-dev-kit/ndk';
+    import type { NDKUser, NDKUserProfile } from '@nostr-dev-kit/ndk';
     import type NDK from '@nostr-dev-kit/ndk';
 
     /**
@@ -22,6 +22,11 @@
      */
     export let user: NDKUser | undefined = undefined;
 
+    /**
+     * The user profile to display an avatar for
+     */
+    export let userProfile: NDKUserProfile | undefined = undefined;
+
     if (!user) {
         let opts = npub ? { npub } : { hexpubkey: pubkey };
         try {
@@ -31,17 +36,30 @@
         }
         npub = user?.npub;
     }
+
+    const fetchProfilePromise = new Promise<NDKUserProfile>((resolve, reject) => {
+        if (userProfile) {
+            resolve(userProfile);
+        } else if (user) {
+            user.fetchProfile().then(() => {
+                userProfile = user!.profile;
+                resolve(userProfile);
+            }).catch(reject);
+        } else {
+            reject(`no user`);
+        }
+    });
 </script>
 
-{#await user?.fetchProfile()}
+{#await fetchProfilePromise}
     <img
         alt=""
         class="avatar avatar--loading {$$props.class}"
         style={$$props.style}
     />
-{:then value}
+{:then userProfile}
     <img
-        src={user?.profile?.image??"https://placehold.co/400/ccc/ccc/webp"}
+        src={userProfile?.image??"https://placehold.co/400/ccc/ccc/webp"}
         alt=""
         class="avatar avatar--image {$$props.class}"
         style={$$props.style}

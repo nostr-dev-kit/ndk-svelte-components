@@ -1,6 +1,6 @@
 {
   "name": "@nostr-dev-kit/ndk-svelte-components",
-  "version": "0.8.13-0",
+  "version": "0.8.17-1",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && npm run package",
@@ -69,7 +69,7 @@
   "types": "./dist/index.d.ts",
   "type": "module",
   "dependencies": {
-    "@nostr-dev-kit/ndk": "^0.8.12",
+    "@nostr-dev-kit/ndk": "^0.8.17",
     "@trivago/prettier-plugin-sort-imports": "^4.2.0",
     "classnames": "^2.3.2",
     "hurdak": "github:ConsignCloud/hurdak",

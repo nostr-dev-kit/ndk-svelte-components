@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { NDKUser } from '@nostr-dev-kit/ndk';
+    import type { NDKUser, NDKUserProfile } from '@nostr-dev-kit/ndk';
     import type NDK from '@nostr-dev-kit/ndk';
     import { truncatedNip05 } from '$lib/utils/user';
     import { truncatedBech32 } from '$lib/utils';
@@ -25,6 +25,11 @@
      */
     export let user: NDKUser | undefined = undefined;
 
+    /**
+     * The user profile to display an avatar for
+     */
+    export let userProfile: NDKUserProfile | undefined = undefined;
+
     if (!user) {
         let opts = npub ? { npub } : { hexpubkey: pubkey };
         user = ndk.getUser(opts);
@@ -37,7 +42,21 @@
 </script>
 
 <span class="name">
-    {#if user}
+    {#if userProfile}
+        <button
+            class="name--button {$$props.class}"
+            style={$$props.style}
+            tabindex="0"
+            on:click|preventDefault|stopPropagation={() => {
+                dispatch('click', user);
+            }}
+        >
+            {userProfile.displayName ||
+                userProfile.name ||
+                truncatedNip05(userProfile) ||
+                truncatedBech32(_npub)}
+        </button>
+    {:else if user}
         {#await user.fetchProfile()}
             <span
                 class="name--loading {$$props.class}"
