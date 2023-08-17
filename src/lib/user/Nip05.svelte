@@ -36,26 +36,33 @@
             console.error(`error trying to get user`, { opts }, e);
         }
     }
+
+    const fetchProfilePromise = new Promise<NDKUserProfile>((resolve, reject) => {
+        if (userProfile) {
+            resolve(userProfile);
+        } else if (user) {
+            user.fetchProfile()
+                .then(() => {
+                    userProfile = user!.profile;
+                    resolve(userProfile!);
+                })
+                .catch(reject);
+        } else {
+            reject(`no user`);
+        }
+    });
 </script>
 
 <span class="name">
-    {#if userProfile}
+    {#await fetchProfilePromise}
+        <span class="nip05--loading {$$props.class}" style={$$props.style}> Loading NIP-05 </span>
+    {:then userProfile}
         <span class="nip05 {$$props.class}" style={$$props.style}>
             {truncatedNip05(userProfile)}
         </span>
-    {:else}
-        {#await user?.fetchProfile()}
-            <span class="nip05--loading {$$props.class}" style={$$props.style}>
-                Loading NIP-05
-            </span>
-        {:then value}
-            <span class="nip05 {$$props.class}" style={$$props.style}>
-                {truncatedNip05(user?.profile)}
-            </span>
-        {:catch error}
-            <span class="nip05--error {$$props.class}" style={$$props.style}>
-                Error loading user profile
-            </span>
-        {/await}
-    {/if}
+    {:catch error}
+        <span class="nip05--error {$$props.class}" style={$$props.style}>
+            Error loading user profile
+        </span>
+    {/await}
 </span>
