@@ -1,6 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/svelte";
 import NDK from "@nostr-dev-kit/ndk";
-
+import type { Meta, StoryObj } from "@storybook/svelte";
 import Nip05 from "../../lib/user/Nip05.svelte";
 
 /**

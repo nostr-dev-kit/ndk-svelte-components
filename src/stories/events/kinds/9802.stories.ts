@@ -1,6 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/svelte";
 import NDK from "@nostr-dev-kit/ndk";
-
+import type { Meta, StoryObj } from "@storybook/svelte";
 import Kind9802Component from "../../../lib/event/content/Kind9802.svelte";
 
 /**
