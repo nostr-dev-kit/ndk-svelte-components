@@ -1,10 +1,10 @@
 <script lang="ts">
-    import type { NDKUser } from '@nostr-dev-kit/ndk';
-    import type NDK from '@nostr-dev-kit/ndk';
-    import Avatar from './Avatar.svelte';
-    import Name from './Name.svelte';
-    import Nip05 from './Nip05.svelte';
-    import Npub from './Npub.svelte';
+    import type { NDKUser } from "@nostr-dev-kit/ndk";
+    import type NDK from "@nostr-dev-kit/ndk";
+    import Avatar from "./Avatar.svelte";
+    import Name from "./Name.svelte";
+    import Nip05 from "./Nip05.svelte";
+    import Npub from "./Npub.svelte";
 
     /**
      * The NDK instance you want to use
@@ -12,17 +12,17 @@
     export let ndk: NDK;
 
     /**
-     * The npub of the user you want to display an avatar for
+     * The npub of the user you want to display a user card for
      */
     export let npub: string | undefined = undefined;
 
     /**
-     * The hexpubkey of the user you want to display an avatar for
+     * The hexpubkey of the user you want to display a user card for
      */
     export let pubkey: string | undefined = undefined;
 
     /**
-     * The user object of the user you want to display an avatar for
+     * The user object of the user you want to display a user card for
      */
     export let user: NDKUser | undefined = undefined;
 
@@ -33,32 +33,25 @@
         } catch (e) {
             console.error(`error trying to get user`, { opts }, e);
         }
-        npub = user?.npub;
     }
 </script>
 
 {#await user?.fetchProfile()}
-    <div class="userCard--loading {$$props.class}" style={$$props.style}>
-        Loading user...
-    </div>
+    <div class="userCard--loading {$$props.class}" style={$$props.style}>Loading user...</div>
 {:then value}
     <div class="userCard {$$props.class}" style={$$props.style}>
         <div class="userCard--avatar">
-            <Avatar {ndk} {npub} {pubkey} {user} class="userCard--avatar-img" />
+            <Avatar {ndk} userProfile={user?.profile} class="userCard--avatar-img" />
         </div>
-        <div class='userCard--details'>
-            <Name {ndk} {npub} {pubkey} {user} class="userCard--name"/>
-            <Nip05 {ndk} {npub} {pubkey} {user} class="userCard--nip05"/>
-            <Npub {ndk} {npub} {pubkey} {user} class="userCard--npub"/>
-            {#if user?.profile?.bio || user?.profile?.about }
-                <div class='userCard--bio'>{user.profile?.bio || user.profile?.about}</div>
-            {/if}
+        <div class="userCard--details">
+            <Name {ndk} userProfile={user?.profile} class="userCard--name" />
+            <Nip05 {ndk} userProfile={user?.profile} class="userCard--nip05" />
+            <Npub {ndk} {npub} {pubkey} {user} class="userCard--npub" />
+            <div class="userCard--bio">{user?.profile?.bio || user?.profile?.about}</div>
         </div>
     </div>
 {:catch error}
-    <div class="userCard--error {$$props.class}" style={$$props.style}>
-        Error fetching user
-    </div>
+    <div class="userCard--error {$$props.class}" style={$$props.style}>Error fetching user</div>
 {/await}
 
 <style lang="postcss">

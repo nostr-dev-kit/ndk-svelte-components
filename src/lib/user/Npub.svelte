@@ -1,10 +1,9 @@
 <script lang="ts">
     import type { NDKUser } from "@nostr-dev-kit/ndk";
     import type NDK from "@nostr-dev-kit/ndk";
-    import { truncatedNpub, copyToClipboard } from "$lib/utils/user";
-    import { Copy, Check } from 'lucide-svelte'
+    import { truncatedNpub, copyToClipboard } from "$lib/utils";
+    import { Copy, Check } from "lucide-svelte";
     import { fade } from "svelte/transition";
-
 
     /**
      * The NDK instance you want to use
@@ -52,18 +51,16 @@
         <span class="npub {$$props.class}" style={$$props.style}>
             {truncatedNpub(user)}
             <button on:click|preventDefault={copyNpub} class="npub--copyButton">
-                <Copy size=16 />
+                <Copy size="16" />
             </button>
             {#if checkVisible}
-                <span in:fade={{duration: 100}} out:fade>
-                    <Check size=16 />
+                <span in:fade={{ duration: 100 }} out:fade>
+                    <Check size="16" />
                 </span>
             {/if}
         </span>
     {:else}
-        <span class="npub--error {$$props.class}" style={$$props.style}>
-            Error loading user
-        </span>
+        <span class="npub--error {$$props.class}" style={$$props.style}> Error loading user </span>
     {/if}
 </span>
 
