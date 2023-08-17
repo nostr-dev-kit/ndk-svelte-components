@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/svelte";
-import NDK from "@nostr-dev-kit/ndk";
 import Npub from "$lib/user/Npub.svelte";
+import NDK from "@nostr-dev-kit/ndk";
+import type { Meta, StoryObj } from "@storybook/svelte";
 
 /**
  * Renders a user's npub string.

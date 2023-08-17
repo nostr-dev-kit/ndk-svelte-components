@@ -24,20 +24,29 @@ const meta = {
             control: "text",
             type: "string",
             table: { type: { summary: "string" } },
-            description: "The user's npub. Only one of `npub`, `pubkey`, or `user` is required.",
+            description:
+                "The user's npub. Only one of `npub`, `pubkey`, `user`, or `userProfile` is required.",
         },
         pubkey: {
             control: "text",
             type: "string",
             table: { type: { summary: "string" } },
             description:
-                "The user's hex pubkey. Only one of `npub`, `pubkey`, or `user` is required.",
+                "The user's hex pubkey. Only one of `npub`, `pubkey`, `user`, or `userProfile` is required.",
         },
         user: {
             control: { type: null },
             type: { name: "other", value: "NDKUser", required: false },
             table: { type: { summary: "NDKUser" } },
-            description: "An NDKUser object. Only one of `npub`, `pubkey`, or `user` is required.",
+            description:
+                "An NDKUser object. Only one of `npub`, `pubkey`, `user`, or `userProfile` is required.",
+        },
+        userProfile: {
+            control: { type: null },
+            type: { name: "other", value: "NDKUserProfile", required: false },
+            table: { type: { summary: "NDKUserProfile" } },
+            description:
+                "An NDKUserProfile object. Only one of `npub`, `pubkey`, `user`, or `userProfile` is required.",
         },
         class: {
             control: "text",

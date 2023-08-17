@@ -1,6 +1,6 @@
+import UserCard from "$lib/user/UserCard.svelte";
 import NDK from "@nostr-dev-kit/ndk";
 import type { Meta, StoryObj } from "@storybook/svelte";
-import UserCard from "$lib/user/UserCard.svelte";
 
 /**
  * Renders a user card with basic metadata info on the user.
@@ -63,13 +63,13 @@ ndk.connect();
 export const Default: Story = {
     args: {
         ndk: ndk,
-        npub: "npub1zuuajd7u3sx8xu92yav9jwxpr839cs0kc3q6t56vd5u9q033xmhsk6c2uc"
+        npub: "npub1zuuajd7u3sx8xu92yav9jwxpr839cs0kc3q6t56vd5u9q033xmhsk6c2uc",
     },
 };
 
 export const Nonexistent: Story = {
     args: {
         ndk: ndk,
-        npub: "npub1vqtlp64gdfdqr64xq9g7t8qc9kyyns7nd23nnsf3mv94aqht8ensn29e34"
+        npub: "npub1vqtlp64gdfdqr64xq9g7t8qc9kyyns7nd23nnsf3mv94aqht8ensn29e34",
     },
 };
