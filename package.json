@@ -1,6 +1,6 @@
 {
     "name": "@nostr-dev-kit/ndk-svelte-components",
-    "version": "0.8.17-3",
+    "version": "0.8.18",
     "scripts": {
         "dev": "vite dev",
         "build": "vite build && npm run package",
