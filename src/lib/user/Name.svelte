@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { NDKUser, NDKUserProfile } from '@nostr-dev-kit/ndk';
     import type NDK from '@nostr-dev-kit/ndk';
-    import { truncatedNip05 } from '$lib/utils/user';
+    import { prettifyNip05 } from '$lib/utils/user';
     import { truncatedBech32 } from '$lib/utils';
     import { createEventDispatcher } from 'svelte';
 
@@ -53,7 +53,7 @@
         >
             {userProfile.displayName ||
                 userProfile.name ||
-                truncatedNip05(userProfile) ||
+                prettifyNip05(userProfile) ||
                 truncatedBech32(_npub)}
         </button>
     {:else if user}
@@ -75,7 +75,7 @@
             >
                 {user.profile?.displayName ||
                     user.profile?.name ||
-                    truncatedNip05(user.profile) ||
+                    prettifyNip05(user.profile) ||
                     truncatedBech32(user.npub)}
             </button>
         {:catch error}

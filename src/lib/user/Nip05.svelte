@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { NDKUser } from "@nostr-dev-kit/ndk";
     import type NDK from "@nostr-dev-kit/ndk";
-    import { truncatedNip05 } from "$lib/utils/user";
+    import { prettifyNip05 } from "$lib/utils/user";
 
     /**
      * The NDK instance you want to use
@@ -40,7 +40,7 @@
             </span>
         {:then value}
             <span class="nip05 {$$props.class}" style={$$props.style}>
-                {truncatedNip05(user.profile)}
+                {prettifyNip05(user.profile)}
             </span>
         {:catch error}
             <span class="nip05--error {$$props.class}" style={$$props.style}>

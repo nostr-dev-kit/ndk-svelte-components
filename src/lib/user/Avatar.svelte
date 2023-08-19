@@ -68,6 +68,7 @@
     <img
         alt=""
         class="avatar avatar--error {$$props.class}"
+        data-error={error}
         style={$$props.style}
     />
 {/await}
