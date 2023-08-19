@@ -43,7 +43,11 @@
         } else if (user) {
             user.fetchProfile().then(() => {
                 userProfile = user!.profile;
-                resolve(userProfile);
+                if (!userProfile) {
+                    reject(`no profile`);
+                } else {
+                    resolve(userProfile);
+                }
             }).catch(reject);
         } else {
             reject(`no user`);
@@ -59,7 +63,7 @@
     />
 {:then userProfile}
     <img
-        src={userProfile?.image??"https://placehold.co/400/ccc/ccc/webp"}
+        src={userProfile?.image??""}
         alt=""
         class="avatar avatar--image {$$props.class}"
         style={$$props.style}

@@ -3,7 +3,6 @@
     import type NDK from '@nostr-dev-kit/ndk';
     import { prettifyNip05 } from '$lib/utils/user';
     import { truncatedBech32 } from '$lib/utils';
-    import { createEventDispatcher } from 'svelte';
 
     /**
      * The NDK instance you want to use
@@ -30,6 +29,11 @@
      */
     export let userProfile: NDKUserProfile | undefined = undefined;
 
+    /**
+     * Optionally specify the maximum length of the npub to display if a name is not available
+     */
+    export let npubMaxLength: number | undefined = undefined;
+
     if (!user) {
         let opts = npub ? { npub } : { hexpubkey: pubkey };
         user = ndk.getUser(opts);
@@ -37,66 +41,33 @@
     }
 
     const _npub = npub || user?.npub;
+    const truncatedNpub = npubMaxLength ? truncatedBech32(_npub, npubMaxLength) : _npub;
 
-    const dispatch = createEventDispatcher();
+    function chooseNameFromDisplay(profile?: NDKUserProfile) {
+        return (
+            profile?.displayName ||
+            profile?.name ||
+            (profile?.nip05 && prettifyNip05(profile.nip05)) ||
+            truncatedNpub
+        )
+    }
 </script>
 
-<span class="name">
+<span class="name {$$props.class}" style={$$props.style}>
     {#if userProfile}
-        <button
-            class="name--button {$$props.class}"
-            style={$$props.style}
-            tabindex="0"
-            on:click|preventDefault|stopPropagation={() => {
-                dispatch('click', user);
-            }}
-        >
-            {userProfile.displayName ||
-                userProfile.name ||
-                prettifyNip05(userProfile) ||
-                truncatedBech32(_npub)}
-        </button>
+        {chooseNameFromDisplay(userProfile)}
     {:else if user}
         {#await user.fetchProfile()}
-            <span
-                class="name--loading {$$props.class}"
-                style={$$props.style}
-            >
-                [{truncatedBech32(_npub)}]
-            </span>
+            {chooseNameFromDisplay()}
         {:then value}
-            <button
-                class="name--button {$$props.class}"
-                style={$$props.style}
-                tabindex="0"
-                on:click|preventDefault|stopPropagation={() => {
-                    dispatch('click', user);
-                }}
-            >
-                {user.profile?.displayName ||
-                    user.profile?.name ||
-                    prettifyNip05(user.profile) ||
-                    truncatedBech32(user.npub)}
-            </button>
+            {chooseNameFromDisplay(user.profile)}
         {:catch error}
             <span
                 class="name--error {$$props.class}"
-                style={$$props.style}
+                data-error={error}
             >
-                [{truncatedBech32(_npub)}]
+                {truncatedNpub}
             </span>
         {/await}
     {/if}
 </span>
-
-<style lang="postcss">
-    .name--button {
-        background: none;
-        color: inherit;
-        border:none;
-        padding: 0;
-        font: inherit;
-        cursor: pointer;
-        outline: inherit;
-    }
-</style>
