@@ -40,12 +40,14 @@
         if (userProfile) {
             resolve(userProfile);
         } else if (user) {
-            user.fetchProfile()
-                .then(() => {
-                    userProfile = user?.profile;
-                    resolve(userProfile!);
-                })
-                .catch(reject);
+            user.fetchProfile().then(() => {
+                userProfile = user!.profile;
+                if (!userProfile) {
+                    reject(`no profile`);
+                } else {
+                    resolve(userProfile);
+                }
+            }).catch(reject);
         } else {
             reject(`no user`);
         }
@@ -56,13 +58,18 @@
     <img alt="" class="avatar avatar--loading {$$props.class}" style={$$props.style} />
 {:then userProfile}
     <img
-        src={userProfile.image ?? "https://placehold.co/400/ccc/ccc/webp"}
+        src={userProfile?.image??""}
         alt=""
         class="avatar avatar--image {$$props.class}"
         style={$$props.style}
     />
 {:catch error}
-    <img alt="" class="avatar avatar--error {$$props.class}" style={$$props.style} />
+    <img
+        alt=""
+        class="avatar avatar--error {$$props.class}"
+        data-error={error}
+        style={$$props.style}
+    />
 {/await}
 
 <style lang="postcss">

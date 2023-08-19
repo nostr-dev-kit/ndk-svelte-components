@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { NDKUser, NDKUserProfile } from "@nostr-dev-kit/ndk";
     import type NDK from "@nostr-dev-kit/ndk";
-    import { truncatedNip05 } from "$lib/utils/user";
+    import { prettifyNip05 } from "$lib/utils/user";
 
     /**
      * The NDK instance you want to use
@@ -55,10 +55,9 @@
 
 <span class="name">
     {#await fetchProfilePromise}
-        <span class="nip05--loading {$$props.class}" style={$$props.style}> Loading NIP-05 </span>
     {:then userProfile}
         <span class="nip05 {$$props.class}" style={$$props.style}>
-            {truncatedNip05(userProfile)}
+            {prettifyNip05(userProfile)}
         </span>
     {:catch error}
         <span class="nip05--error {$$props.class}" style={$$props.style}>
