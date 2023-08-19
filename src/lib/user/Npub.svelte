@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { NDKUser } from "@nostr-dev-kit/ndk";
     import type NDK from "@nostr-dev-kit/ndk";
-    import { truncatedNpub, copyToClipboard } from "$lib/utils";
+    import { copyToClipboard, truncatedBech32 } from "$lib/utils";
     import { Copy, Check } from "lucide-svelte";
     import { fade } from "svelte/transition";
 
@@ -24,6 +24,11 @@
      * The user object of the user you want to display an avatar for
      */
     export let user: NDKUser | undefined = undefined;
+
+    /**
+     * Optionally specify the maximum length of the npub to display
+     */
+    export let npubMaxLength: number | undefined = undefined;
 
     if (!user) {
         let opts = npub ? { npub } : { hexpubkey: pubkey };
@@ -49,7 +54,7 @@
 <span class="name">
     {#if user && user.npub}
         <span class="npub {$$props.class}" style={$$props.style}>
-            {truncatedNpub(user)}
+            {npubMaxLength ? truncatedBech32(user.npub, npubMaxLength) : user.npub}
             <button on:click|preventDefault={copyNpub} class="npub--copyButton">
                 <Copy size="16" />
             </button>

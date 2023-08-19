@@ -5,7 +5,3 @@ export function prettifyNip05(nip05: string): string {
         return nip05;
     }
 }
-
-export function truncatedNpub(user: NDKUser): string {
-    return user.npub ? truncatedBech32(user.npub, 16) : "";
-}
