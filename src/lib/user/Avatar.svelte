@@ -1,6 +1,6 @@
 <script lang="ts">
-    import type { NDKUser, NDKUserProfile } from '@nostr-dev-kit/ndk';
-    import type NDK from '@nostr-dev-kit/ndk';
+    import type { NDKUser, NDKUserProfile } from "@nostr-dev-kit/ndk";
+    import type NDK from "@nostr-dev-kit/ndk";
 
     /**
      * The NDK instance you want to use
@@ -23,18 +23,17 @@
     export let user: NDKUser | undefined = undefined;
 
     /**
-     * The user profile to display an avatar for
+     * An NDKUserProfile object for the user you want to display an avatar for
      */
     export let userProfile: NDKUserProfile | undefined = undefined;
 
-    if (!user) {
+    if (!userProfile && !user) {
         let opts = npub ? { npub } : { hexpubkey: pubkey };
         try {
             user = ndk.getUser(opts);
         } catch (e) {
             console.error(`error trying to get user`, { opts }, e);
         }
-        npub = user?.npub;
     }
 
     const fetchProfilePromise = new Promise<NDKUserProfile>((resolve, reject) => {
@@ -56,11 +55,7 @@
 </script>
 
 {#await fetchProfilePromise}
-    <img
-        alt=""
-        class="avatar avatar--loading {$$props.class}"
-        style={$$props.style}
-    />
+    <img alt="" class="avatar avatar--loading {$$props.class}" style={$$props.style} />
 {:then userProfile}
     <img
         src={userProfile?.image??""}
@@ -95,5 +90,4 @@
             opacity: 0.5;
         }
     }
-
 </style>

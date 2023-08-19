@@ -74,6 +74,7 @@
         "classnames": "^2.3.2",
         "hurdak": "github:ConsignCloud/hurdak",
         "isomorphic-dompurify": "^1.8.0",
+        "lucide-svelte": "^0.268.0",
         "marked": "^7.0.3",
         "marked-gfm-heading-id": "^3.0.6",
         "marked-mangle": "^1.1.2",

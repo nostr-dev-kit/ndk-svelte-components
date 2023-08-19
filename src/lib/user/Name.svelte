@@ -10,22 +10,22 @@
     export let ndk: NDK;
 
     /**
-     * The npub of the user you want to display an avatar for
+     * The npub of the user you want to display a name for
      */
     export let npub: string | undefined = undefined;
 
     /**
-     * The hexpubkey of the user you want to display an avatar for
+     * The hexpubkey of the user you want to display a name for
      */
     export let pubkey: string | undefined = undefined;
 
     /**
-     * The user object of the user you want to display an avatar for
+     * The user object of the user you want to display a name for
      */
     export let user: NDKUser | undefined = undefined;
 
     /**
-     * The user profile to display an avatar for
+     * An NDKUserProfile object for the user you want to display a name for
      */
     export let userProfile: NDKUserProfile | undefined = undefined;
 
@@ -36,8 +36,12 @@
 
     if (!user) {
         let opts = npub ? { npub } : { hexpubkey: pubkey };
-        user = ndk.getUser(opts);
-        npub = user.npub;
+        try {
+            user = ndk.getUser(opts);
+            npub = user.npub;
+        } catch (e) {
+            console.error(`error trying to get user`, { opts }, e);
+        }
     }
 
     const _npub = npub || user?.npub;
