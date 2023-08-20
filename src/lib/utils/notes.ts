@@ -1,4 +1,3 @@
-import { first } from "hurdak/lib/hurdak";
 import { nip19 } from "nostr-tools";
 import { last, pluck, identity } from "ramda";
 
@@ -13,6 +12,8 @@ export const NOSTR_NEVENT = "nostr:nevent";
 export const NOSTR_NPUB = "nostr:npub";
 export const NOSTR_NPROFILE = "nostr:nprofile";
 export const NOSTR_NADDR = "nostr:naddr";
+
+const first = (list: any) => list ? list[0] : undefined
 
 export const fromNostrURI = (s) => s.replace(/^[\w\+]+:\/?\/?/, "");
 
