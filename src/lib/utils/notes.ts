@@ -15,13 +15,24 @@ export const NOSTR_NADDR = "nostr:naddr";
 
 const first = (list: any) => list ? list[0] : undefined
 
-export const fromNostrURI = (s) => s.replace(/^[\w\+]+:\/?\/?/, "");
+export const fromNostrURI = (s: string) => s.replace(/^[\w+]+:\/?\/?/, "");
 
-export const urlIsMedia = (url) =>
+export const urlIsMedia = (url: string) =>
     !url.match(/\.(apk|docx|xlsx|csv|dmg)/) && last(url.split("://")).includes("/");
 
-export const parseContent = ({ content, tags = [], html = false }) => {
-    const result: string[] = [];
+type ContentArgs = {
+    content: string;
+    tags?: Array<[string, string, string]>;
+    html?: boolean;
+};
+
+type ParsedPart = {
+    type: string;
+    value: any;
+};
+
+export const parseContent = ({ content, tags = [], html = false }: ContentArgs): ParsedPart[] => {
+    const result: ParsedPart[] = [];
     let text = content.trim();
     let buffer = "";
 
