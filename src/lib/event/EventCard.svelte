@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { EventContent, Name } from '$lib';
-    import Avatar from '$lib/user/Avatar.svelte';
-    import type { NDKEvent } from '@nostr-dev-kit/ndk';
-    import type NDK from '@nostr-dev-kit/ndk';
+    import { EventContent, Name } from "$lib";
+    import Avatar from "$lib/user/Avatar.svelte";
+    import type { NDKEvent } from "@nostr-dev-kit/ndk";
+    import type NDK from "@nostr-dev-kit/ndk";
 
     export let ndk: NDK;
     export let id: string | undefined = undefined;
@@ -15,7 +15,7 @@
         } else if (id) {
             event = await ndk.fetchEvent(id);
 
-            if (!event) reject('Event not found');
+            if (!event) reject("Event not found");
             else resolve(event);
         }
     });
